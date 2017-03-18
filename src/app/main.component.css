@@ -1,0 +1,22 @@
+header nav ul {
+  list-style-type: none;
+}
+
+header nav ul li {
+  display: inline-block;
+  width: 30%;
+}
+
+header h1 {
+  display: inline-block;
+}
+
+
+header nav {
+  display: inline-block;
+}
+
+header {
+  background: lightgray;
+  padding: .5rem;
+}

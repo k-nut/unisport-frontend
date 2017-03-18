@@ -1,0 +1,69 @@
+<div class="container">
+  <form data-ng-submit="searchClasses()" style='display: inline-block'>
+    <input type="search" list="classes" name="searchTerm" [(ngModel)]="searchTerm" placeholder="Suchen...">
+    <datalist id="classes">
+      <option ng-repeat="class in classes">{{class}}</option>
+    </datalist>
+
+    <label *ngFor="let day of days" class="checkbox-inline">
+      <input type="checkbox" data-ng-model="selection[$index]" id="{{day.name}}" />{{day.name}}
+    </label>
+    <select data-ng-model="bookable">
+      <option value="false">Alle Kurse</option>
+      <option value="true">Nur buchbare</option>
+      <option value="waitingList">Buchbar &amp; Warteliste</option>
+    </select>
+    <input type="submit" value="Suchen" />
+  </form>
+
+  <p style='float: right'> Letztes Update: <span id='lastUpadated'>{{lastUpdated}}</span> </p>
+
+  <div data-ng-show="numberOfResults > -1"> {{sportsClasses.length}} Kurse gefunden </div>
+
+  <div class="spinner" data-ng-show="loading">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+
+  <div *ngFor="let sportsClass of sportsClasses" data-ng-hide="loading">
+    <h1> {{ sportsClass.name }} </h1>
+    <a style="display:block" href="{{ sportsClass.url }}"> {{ sportsClass.url }} </a>
+    <button (click)="sportsClass.toggleVisibility()">Beschreibung anzeigen</button>
+    <p class="details"
+       [innerHTML]="sportsClass.description"
+       [hidden]="!sportsClass.showDescription"></p>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <colgroup>
+          <col style="width: 20%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+          <col style="width: 10%">
+        </colgroup>
+        <tr>
+          <th>Name</th>
+          <th>Tag</th>
+          <th>Zeit</th>
+          <th>Zeitraum</th>
+          <th>Ort</th>
+          <th>Preis</th>
+          <th>Buchbar</th>
+        </tr>
+        Description: {{ sportsClass.showDescription}}
+        <tr *ngFor='let course of sportsClass.courses'>
+          <td> {{course.name }} </td>
+          <td> {{course.day }} </td>
+          <td> {{course.time }} </td>
+          <td> {{course.startDate}}-{{course.endDate}} </td>
+          <td> {{course.place }} </td>
+          <td> {{course.price }} </td>
+          <td> {{course.bookable }} </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
