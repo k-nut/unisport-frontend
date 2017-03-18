@@ -1,5 +1,5 @@
 <div class="container">
-  <form data-ng-submit="searchClasses()" style='display: inline-block'>
+  <form (ngSubmit)="getSportsClasses()" style='display: inline-block'>
     <input type="search" list="classes" name="searchTerm" [(ngModel)]="searchTerm" placeholder="Suchen...">
     <datalist id="classes">
       <option ng-repeat="class in classes">{{class}}</option>

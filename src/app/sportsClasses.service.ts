@@ -1,5 +1,5 @@
 import { Injectable }              from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import {Http, Response, URLSearchParams}          from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -11,11 +11,12 @@ import { SportsClass } from "./sportsClass";
 export class SportsClassService {
   private sportsClassUrl = '//backend.unisport.berlin/classes';  // URL to web API
 
-  constructor (private http: Http) {  console.log("I am being called");
-  }
+  constructor (private http: Http) { }
 
-  getSportsClasses(): Observable<SportsClass[]> {
-    return this.http.get(this.sportsClassUrl)
+  getSportsClasses(name:string): Observable<SportsClass[]> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('name', name);
+    return this.http.get(this.sportsClassUrl, {search: params})
       .map(this.extractData)
       .catch(this.handleError);
   }
