@@ -1,9 +1,17 @@
+$header-background: #eeeeee
+
 header
-  background: lightgray
+  background: $header-background
   padding: .5rem
+  border-bottom: 1px solid darken($header-background, 10)
 
   h1, nav
     display: inline-block
 
-  nav ul
+  nav ul li
     list-style-type: none
+    display: inline-block
+
+  a
+    text-decoration: none
+    color: black
