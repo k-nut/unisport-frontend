@@ -26,8 +26,15 @@
     <div class="bounce3"></div>
   </div>
 
-  <div *ngFor="let sportsClass of sportsClasses" data-ng-hide="loading">
-    <h1> {{ sportsClass.name }} </h1>
+  <div class="pagination">
+    Seite:
+    <ul>
+      <li *ngFor="let page of pages"><button [ngClass]="{'selected': currentPage === page}" (click)="setPage(page)">{{page}}</button></li>
+    </ul>
+  </div>
+
+  <div *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10" class="sportsClass">
+    <h2> {{ sportsClass.name }} </h2>
     <a style="display:block" href="{{ sportsClass.url }}"> {{ sportsClass.url }} </a>
     <button (click)="sportsClass.toggleVisibility()">Beschreibung anzeigen</button>
     <p class="details"
@@ -45,25 +52,28 @@
           <col style="width: 10%">
           <col style="width: 10%">
         </colgroup>
-        <tr>
-          <th>Name</th>
-          <th>Tag</th>
-          <th>Zeit</th>
-          <th>Zeitraum</th>
-          <th>Ort</th>
-          <th>Preis</th>
-          <th>Buchbar</th>
-        </tr>
-        Description: {{ sportsClass.showDescription}}
-        <tr *ngFor='let course of sportsClass.courses'>
-          <td> {{course.name }} </td>
-          <td> {{course.day }} </td>
-          <td> {{course.time }} </td>
-          <td> {{course.startDate}}-{{course.endDate}} </td>
-          <td> {{course.place }} </td>
-          <td> {{course.price }} </td>
-          <td> {{course.bookable }} </td>
-        </tr>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tag</th>
+            <th>Zeit</th>
+            <th>Zeitraum</th>
+            <th>Ort</th>
+            <th>Preis</th>
+            <th>Buchbar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let course of sportsClass.courses'>
+            <td> {{course.name }} </td>
+            <td> {{course.day }} </td>
+            <td> {{course.time }} </td>
+            <td> {{course.startDate}}-{{course.endDate}} </td>
+            <td> {{course.place }} </td>
+            <td> {{course.price }} </td>
+            <td> {{course.bookable }} </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

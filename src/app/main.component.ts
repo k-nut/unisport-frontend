@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
+import * as _ from "lodash";
 
 import {SportsClassService} from "./sportsClasses.service"
 import {SportsClass} from "./sportsClass";
+
 
 
 export class Day {
@@ -25,6 +27,7 @@ export class Day {
 export class MainComponent implements OnInit {
   title = 'app works!';
   errorMessage: string;
+  pagingStart: number;
   days = [
     new Day("Mo"),
     new Day("Di"),
@@ -36,23 +39,34 @@ export class MainComponent implements OnInit {
   ];
   searchTerm = "Handball";
   sportsClasses: SportsClass[];
+  pages: number[];
+  currentPage: number;
 
   constructor(private sportsClassService: SportsClassService) {
   }
 
+  setPage(page){
+    this.currentPage = page;
+    this.pagingStart = (page - 1) * 10;
+  }
+
 
   getSportsClasses() {
-    this.sportsClassService.getSportsClasses()
+    this.sportsClassService.getSportsClasses(this.searchTerm)
       .subscribe(
         sportsClasses => {
-          this.sportsClasses = sportsClasses
+          this.sportsClasses = sportsClasses;
+          this.setPage(1)
         },
         error => this.errorMessage = <any>error);
   }
 
   ngOnInit() {
     this.sportsClasses =[];
+    this.pagingStart = 0;
     this.getSportsClasses();
+    this.pages = _.range(1, 10);
+    this.currentPage = 1;
   }
 
 
