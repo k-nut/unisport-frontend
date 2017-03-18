@@ -31,7 +31,8 @@
     <a style="display:block" href="{{ sportsClass.url }}"> {{ sportsClass.url }} </a>
     <button (click)="sportsClass.toggleVisibility()">Beschreibung anzeigen</button>
     <p class="details"
-       [innerHTML]="sportsClass.description"
+       [myHighlight]="searchTerm"
+       [text]="sportsClass.description"
        [hidden]="!sportsClass.showDescription"></p>
     <div class="table-responsive">
       <table class="table table-striped">

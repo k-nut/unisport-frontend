@@ -8,13 +8,15 @@ import {RouterModule} from "@angular/router";
 import {MainComponent} from "./main.component";
 import {AboutComponent} from "./about.component";
 import {ImprintComponent} from "./imprint.component";
+import {HighlightDirective} from "./highlight.directive";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AboutComponent,
-    ImprintComponent
+    ImprintComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
