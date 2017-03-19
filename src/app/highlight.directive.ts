@@ -13,6 +13,7 @@ export class HighlightDirective implements OnChanges {
     } else {
       newContent = this.text;
     }
+    newContent = newContent.replace(new RegExp("\n", "gi"), "<br />");
 
     this.renderer.setElementProperty(this.el.nativeElement, 'innerHTML', newContent);
 
