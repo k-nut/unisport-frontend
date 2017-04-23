@@ -25,7 +25,6 @@ export class Day {
 })
 
 export class MainComponent implements OnInit {
-  title = 'app works!';
   errorMessage: string;
   pagingStart: number;
   days = [
