@@ -34,7 +34,10 @@ import {HighlightDirective} from "./highlight.directive";
       {
         path: 'imprint',
         component: ImprintComponent
-      }
+      },
+      { path: '',
+        redirectTo: '/classes',
+        pathMatch: 'full' },
     ])
   ],
   providers: [],
