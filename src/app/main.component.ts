@@ -4,6 +4,8 @@ import * as _ from "lodash";
 import {SportsClassService} from "./sportsClasses.service"
 import {SportsClass} from "./sportsClass";
 import {ResultsAgeService} from "./resultsAge.service";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 
 
@@ -48,8 +50,12 @@ export class MainComponent implements OnInit {
   bookable: string = "false";
   classes: SportsClass[];
   lastUpdated: Date;
+  private sub: Subscription;
 
-  constructor(private sportsClassService: SportsClassService, private resultsAgeService: ResultsAgeService) {
+  constructor(private sportsClassService: SportsClassService,
+              private resultsAgeService: ResultsAgeService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   setPage(page){
@@ -62,9 +68,27 @@ export class MainComponent implements OnInit {
     this.pagination.end = lastResult > this.sportsClasses.length ? this.sportsClasses.length : lastResult
   }
 
+  updateUrlParams(selectedDays = []) {
+    const params = {};
+    if (this.searchTerm){
+      params['searchTerm'] = this.searchTerm;
+    }
+    if (selectedDays.length) {
+      params['selectedDays'] = _.map(selectedDays, 'name')
+    }
+    if (this.bookable !== "false") {
+      params['bookable'] = this.bookable
+    }
+    this.router.navigate([], {
+      queryParams: params,
+      relativeTo: this.route
+    });
+  }
+
 
   getSportsClasses() {
     const selectedDays = _.filter(this.days, 'selected');
+    this.updateUrlParams(selectedDays);
     this.sportsClassService.getSportsClasses(this.searchTerm, this.bookable, selectedDays)
       .subscribe(
         sportsClasses => {
@@ -76,6 +100,20 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sub = this.route.queryParams.subscribe((params: Params) => {
+      if (params['searchTerm']){
+        this.searchTerm = params['searchTerm']
+      }
+      if (params['selectedDays']){
+        const days = params['selectedDays'].split(',')
+        days.forEach((day) => {
+          this.days.find(d => d.name == day).selected = true;
+        })
+      }
+      if (params['bookable']){
+        this.bookable = params['bookable']
+      }
+    });
     this.sportsClasses =[];
     this.pagingStart = 0;
     this.getSportsClasses();
@@ -93,5 +131,7 @@ export class MainComponent implements OnInit {
     })
   }
 
-
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }
