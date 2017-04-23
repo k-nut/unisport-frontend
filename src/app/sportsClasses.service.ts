@@ -11,7 +11,7 @@ import {Day} from "./main.component";
 
 @Injectable()
 export class SportsClassService {
-  private sportsClassUrl = '//backend.unisport.berlin/classes';
+  private sportsClassUrl = 'https://backend.unisport.berlin/classes';
 
   constructor (private http: Http) { }
 
