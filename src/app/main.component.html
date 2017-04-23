@@ -2,7 +2,7 @@
   <form (ngSubmit)="getSportsClasses()" style='display: inline-block'>
     <input type="search" list="classes" name="searchTerm" [(ngModel)]="searchTerm" placeholder="Suchen...">
     <datalist id="classes">
-      <option ng-repeat="class in classes">{{class}}</option>
+      <option *ngFor="let class of classes">{{class.name}}</option>
     </datalist>
 
     <label *ngFor="let day of days" class="checkbox-inline">

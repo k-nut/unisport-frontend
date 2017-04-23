@@ -45,6 +45,7 @@ export class MainComponent implements OnInit {
     end: 10
   };
   bookable: string = "false";
+  classes: SportsClass[];
 
   constructor(private sportsClassService: SportsClassService) {
   }
@@ -78,6 +79,13 @@ export class MainComponent implements OnInit {
     this.getSportsClasses();
     this.pages = _.range(1, 10);
     this.currentPage = 1;
+    this.sportsClassService.getSportsClasses('')
+      .subscribe(
+        sportsClasses => {
+          this.classes = sportsClasses;
+        },
+        error => this.errorMessage = <any>error
+      );
   }
 
 
