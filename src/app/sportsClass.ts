@@ -28,7 +28,7 @@ class Course {
   time: string;
   constructor(object){
     this.bookable = object.bookable;
-    this.day = object.bookable;
+    this.day = object.day;
     this.endDate = object.endDate;
     this.name = object.name;
     this.place = object.place;
