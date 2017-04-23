@@ -21,7 +21,7 @@
 
   </form>
 
-  <p style='float: right'> Letztes Update: <span id='lastUpadated'>{{lastUpdated}}</span> </p>
+  <p style='float: right'> Datenstand: <span id='lastUpadated'>{{lastUpdated | date : "dd.MM.yyyy hh:mm"}}</span> </p>
 
   <div class="spinner" data-ng-show="loading">
     <div class="bounce1"></div>

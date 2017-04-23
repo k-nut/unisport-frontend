@@ -3,6 +3,7 @@ import * as _ from "lodash";
 
 import {SportsClassService} from "./sportsClasses.service"
 import {SportsClass} from "./sportsClass";
+import {ResultsAgeService} from "./resultsAge.service";
 
 
 
@@ -21,7 +22,7 @@ export class Day {
   selector: 'app-root',
   templateUrl: './main.component.html',
   styleUrls: ['main.component.sass'],
-  providers: [SportsClassService]
+  providers: [SportsClassService, ResultsAgeService]
 })
 
 export class MainComponent implements OnInit {
@@ -46,8 +47,9 @@ export class MainComponent implements OnInit {
   };
   bookable: string = "false";
   classes: SportsClass[];
+  lastUpdated: Date;
 
-  constructor(private sportsClassService: SportsClassService) {
+  constructor(private sportsClassService: SportsClassService, private resultsAgeService: ResultsAgeService) {
   }
 
   setPage(page){
@@ -86,6 +88,9 @@ export class MainComponent implements OnInit {
         },
         error => this.errorMessage = <any>error
       );
+    this.resultsAgeService.getAge().subscribe(age => {
+      this.lastUpdated = age
+    })
   }
 
 
