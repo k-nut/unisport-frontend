@@ -48,7 +48,7 @@ export class MainComponent implements OnInit {
     end: 10
   };
   bookable: string = "false";
-  classes: SportsClass[];
+  classes: string[];
   lastUpdated: Date;
   private sub: Subscription;
 
@@ -119,10 +119,10 @@ export class MainComponent implements OnInit {
     this.getSportsClasses();
     this.pages = _.range(1, 10);
     this.currentPage = 1;
-    this.sportsClassService.getSportsClasses('')
+    this.sportsClassService.getNames()
       .subscribe(
-        sportsClasses => {
-          this.classes = sportsClasses;
+        names => {
+          this.classes = names;
         },
         error => this.errorMessage = <any>error
       );

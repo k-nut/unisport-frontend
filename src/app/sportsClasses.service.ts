@@ -11,7 +11,9 @@ import {Day} from "./main.component";
 
 @Injectable()
 export class SportsClassService {
-  private sportsClassUrl = 'https://backend.unisport.berlin/classes';
+  private baseUrl = 'https://backend.unisport.berlin'
+  private sportsClassUrl = `${this.baseUrl}/classes`;
+  private namesUrl = `${this.baseUrl}/names`;
 
   constructor (private http: Http) { }
 
@@ -27,6 +29,12 @@ export class SportsClassService {
     }
     return this.http.get(this.sportsClassUrl, {search: params})
       .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getNames(){
+    return this.http.get(this.namesUrl)
+      .map(response => response.json())
       .catch(this.handleError);
   }
 

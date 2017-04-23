@@ -3,7 +3,7 @@
     <input class='search' type="text" list="classes" name="searchTerm" [(ngModel)]="searchTerm" placeholder="Suchen...">
     <input type="submit" value="Suchen" />
     <datalist id="classes">
-      <option *ngFor="let class of classes">{{class.name}}</option>
+      <option *ngFor="let class of classes">{{class}}</option>
     </datalist>
 
     <div class="additionalFilters">
