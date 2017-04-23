@@ -32,7 +32,9 @@
   <div class="pagination">
     Seite:
     <ul>
-      <li *ngFor="let page of pages"><button [ngClass]="{'selected': currentPage === page}" (click)="setPage(page)">{{page}}</button></li>
+      <li *ngFor="let page of pages">
+        <button [ngClass]="{'selected': currentPage === page}" (click)="setPage(page)">{{page}}</button>
+      </li>
     </ul>
     <div>
       Zeige Ergebnisse {{ pagination.start }} bis {{ pagination.end }} von {{sportsClasses.length}}
