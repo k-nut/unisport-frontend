@@ -40,6 +40,11 @@ export class MainComponent implements OnInit {
   sportsClasses: SportsClass[];
   pages: number[];
   currentPage: number;
+  pagination = {
+    start: 1,
+    end: 10
+  };
+  bookable: string = "false";
 
   constructor(private sportsClassService: SportsClassService) {
   }
@@ -47,15 +52,21 @@ export class MainComponent implements OnInit {
   setPage(page){
     this.currentPage = page;
     this.pagingStart = (page - 1) * 10;
+
+    const offset = (this.currentPage - 1) * 10;
+    const lastResult = offset + 10;
+    this.pagination.start = offset + 1;
+    this.pagination.end = lastResult > this.sportsClasses.length ? this.sportsClasses.length : lastResult
   }
 
 
   getSportsClasses() {
-    const selectedDays = _.filter(this.days, 'selected')
+    const selectedDays = _.filter(this.days, 'selected');
     this.sportsClassService.getSportsClasses(this.searchTerm, this.bookable, selectedDays)
       .subscribe(
         sportsClasses => {
           this.sportsClasses = sportsClasses;
+          this.pages = _.range(1, Math.ceil(sportsClasses.length / 10) + 1);
           this.setPage(1)
         },
         error => this.errorMessage = <any>error);

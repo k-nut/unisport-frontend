@@ -20,8 +20,6 @@
 
   <p style='float: right'> Letztes Update: <span id='lastUpadated'>{{lastUpdated}}</span> </p>
 
-  <div data-ng-show="numberOfResults > -1"> {{sportsClasses.length}} Kurse gefunden </div>
-
   <div class="spinner" data-ng-show="loading">
     <div class="bounce1"></div>
     <div class="bounce2"></div>
@@ -33,6 +31,9 @@
     <ul>
       <li *ngFor="let page of pages"><button [ngClass]="{'selected': currentPage === page}" (click)="setPage(page)">{{page}}</button></li>
     </ul>
+    <div>
+      Zeige Ergebnisse {{ pagination.start }} bis {{ pagination.end }} von {{sportsClasses.length}}
+    </div>
   </div>
 
   <div *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10" class="sportsClass">
