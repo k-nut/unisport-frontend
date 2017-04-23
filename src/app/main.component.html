@@ -6,13 +6,15 @@
     </datalist>
 
     <label *ngFor="let day of days" class="checkbox-inline">
-      <input type="checkbox" data-ng-model="selection[$index]" id="{{day.name}}" />{{day.name}}
+      <input type="checkbox" [(ngModel)]="day.selected" name="{{day.name}}"/>{{day.name}}
     </label>
-    <select data-ng-model="bookable">
+
+    <select [(ngModel)]="bookable" name="bookableOptions">
       <option value="false">Alle Kurse</option>
       <option value="true">Nur buchbare</option>
       <option value="waitingList">Buchbar &amp; Warteliste</option>
     </select>
+
     <input type="submit" value="Suchen" />
   </form>
 

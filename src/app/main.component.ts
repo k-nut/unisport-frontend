@@ -52,7 +52,8 @@ export class MainComponent implements OnInit {
 
 
   getSportsClasses() {
-    this.sportsClassService.getSportsClasses(this.searchTerm)
+    const selectedDays = _.filter(this.days, 'selected')
+    this.sportsClassService.getSportsClasses(this.searchTerm, this.bookable, selectedDays)
       .subscribe(
         sportsClasses => {
           this.sportsClasses = sportsClasses;

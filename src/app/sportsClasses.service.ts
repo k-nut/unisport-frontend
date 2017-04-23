@@ -1,21 +1,30 @@
 import { Injectable }              from '@angular/core';
 import {Http, Response, URLSearchParams}          from '@angular/http';
+import * as _ from "lodash";
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { SportsClass } from "./sportsClass";
+import {Day} from "./main.component";
 
 @Injectable()
 export class SportsClassService {
-  private sportsClassUrl = '//backend.unisport.berlin/classes';  // URL to web API
+  private sportsClassUrl = '//backend.unisport.berlin/classes';
 
   constructor (private http: Http) { }
 
-  getSportsClasses(name:string): Observable<SportsClass[]> {
+  getSportsClasses(name:string, bookable:string = "false", selectedDays:Day[] = []): Observable<SportsClass[]> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('name', name);
+    if (bookable !== "false"){
+      params.set('bookable', bookable)
+    }
+    if (selectedDays.length){
+      const dayList = _.map(selectedDays, 'name').join(",");
+      params.set('days', dayList)
+    }
     return this.http.get(this.sportsClassUrl, {search: params})
       .map(this.extractData)
       .catch(this.handleError);
