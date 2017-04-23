@@ -40,15 +40,20 @@
   </div>
 
   <div *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10" class="sportsClass">
+
     <h2> {{ sportsClass.name }} </h2>
-    <a style="display:block" href="{{ sportsClass.url }}"> {{ sportsClass.url }} </a>
+
+    <a class="resultLink" href="{{ sportsClass.url }}"> {{ sportsClass.url }} </a>
+
     <button (click)="sportsClass.toggleVisibility()">Beschreibung anzeigen</button>
+
     <p class="details"
        [myHighlight]="searchTerm"
        [text]="sportsClass.description"
        [hidden]="!sportsClass.showDescription"></p>
-    <div class="table-responsive">
-      <table class="table table-striped">
+
+    <div class="tableContainer">
+      <table>
         <colgroup>
           <col style="width: 20%">
           <col style="width: 10%">
