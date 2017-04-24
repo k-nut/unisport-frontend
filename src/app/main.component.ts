@@ -2,22 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import * as _ from "lodash";
 
 import {SportsClassService} from "./sportsClasses.service"
-import {SportsClass} from "./sportsClass";
-import {ResultsAgeService} from "./resultsAge.service";
+import {SportsClass, Day} from "./models";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-
-
-
-export class Day {
-  name: string;
-  selected: boolean;
-
-  constructor(name: string) {
-    this.name = name;
-    this.selected = false;
-  }
-}
+import {Subscription} from "rxjs/Subscription";
+import {ResultsAgeService} from "./resultsAge.service";
 
 
 @Component({
@@ -131,7 +119,8 @@ export class MainComponent implements OnInit {
     })
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
-  }
+  // TODO: This breaks the tests because it is called before `ngOnInit`. Figure out why
+  // ngOnDestroy() {
+  //   this.sub.unsubscribe();
+  // }
 }

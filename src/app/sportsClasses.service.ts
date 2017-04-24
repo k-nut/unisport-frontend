@@ -6,8 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { SportsClass } from "./sportsClass";
-import {Day} from "./main.component";
+import { SportsClass, Day } from "./models";
 
 @Injectable()
 export class SportsClassService {
