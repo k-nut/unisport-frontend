@@ -10,6 +10,7 @@ import {ResultsAgeService} from "./resultsAge.service";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
+import {PiwikService} from "./piwik.service";
 
 class HeroDetailServiceSpy {
   getAge = jasmine.createSpy('getAge').and.callFake(
@@ -27,12 +28,16 @@ describe('MainComponent', () => {
     const ageStub = {
       getAge: () =>  Observable.of(new Date()),
     };
+    const piwikStub = {
+      trackSiteSearch: () =>  null,
+    };
 
     TestBed.overrideComponent(MainComponent, {
       set: {
         providers: [
           { provide: SportsClassService, useValue: sportsClassesStub },
           { provide: ResultsAgeService, useValue: ageStub },
+          { provide: PiwikService, useValue: piwikStub },
           ]
       }
     });

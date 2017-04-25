@@ -6,13 +6,14 @@ import {SportsClass, Day} from "./models";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {ResultsAgeService} from "./resultsAge.service";
+import {PiwikService} from "./piwik.service";
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './main.component.html',
   styleUrls: ['main.component.sass'],
-  providers: [SportsClassService, ResultsAgeService]
+  providers: [SportsClassService, ResultsAgeService, PiwikService]
 })
 
 export class MainComponent implements OnInit {
@@ -43,7 +44,8 @@ export class MainComponent implements OnInit {
   constructor(private sportsClassService: SportsClassService,
               private resultsAgeService: ResultsAgeService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private piwikService: PiwikService) {
   }
 
   setPage(page){
@@ -82,6 +84,7 @@ export class MainComponent implements OnInit {
         sportsClasses => {
           this.sportsClasses = sportsClasses;
           this.pages = _.range(1, Math.ceil(sportsClasses.length / 10) + 1);
+          this.piwikService.trackSiteSearch(this.searchTerm, sportsClasses.length);
           this.setPage(1)
         },
         error => this.errorMessage = <any>error);
