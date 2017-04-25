@@ -4,6 +4,7 @@ import * as _ from "lodash";
 import {SportsClassService} from "./sportsClasses.service"
 import {SportsClass, Day} from "./models";
 import {ActivatedRoute, Params, Router} from "@angular/router";
+import {state, trigger, style, transition, animate} from "@angular/animations";
 import {Subscription} from "rxjs/Subscription";
 import {ResultsAgeService} from "./resultsAge.service";
 import {PiwikService} from "./piwik.service";
@@ -13,7 +14,20 @@ import {PiwikService} from "./piwik.service";
   selector: 'app-root',
   templateUrl: './main.component.html',
   styleUrls: ['main.component.sass'],
-  providers: [SportsClassService, ResultsAgeService, PiwikService]
+  providers: [SportsClassService, ResultsAgeService, PiwikService],
+  animations: [
+    trigger('fadeInOut', [
+      state('*', style({ 'overflow-y': 'hidden' })),
+      state('void', style({ 'overflow-y': 'hidden' })),
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({height:0}),
+        animate(250, style({height:'*'}))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(250, style({height:0}))
+      ])
+    ])
+  ]
 })
 
 export class MainComponent implements OnInit {
