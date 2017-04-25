@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
 import * as _ from "lodash";
 
-import {SportsClassService} from "./sportsClasses.service"
-import {SportsClass, Day} from "./models";
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {state, trigger, style, transition, animate} from "@angular/animations";
 import {Subscription} from "rxjs/Subscription";
+
+import {SportsClassService} from "./sportsClasses.service"
+import {SportsClass, Day} from "./models";
 import {ResultsAgeService} from "./resultsAge.service";
 import {PiwikService} from "./piwik.service";
+
 
 
 @Component({
