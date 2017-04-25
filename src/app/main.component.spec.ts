@@ -1,16 +1,14 @@
-import {TestBed, async, tick} from '@angular/core/testing';
+import {TestBed, async } from '@angular/core/testing';
 
 import {RouterTestingModule} from "@angular/router/testing";
 import {MainComponent} from "./main.component";
-import {AppComponent} from "./app.component";
 import {HighlightDirective} from "./highlight.directive";
 import {FormsModule} from "@angular/forms";
 import {SportsClassService} from "./sportsClasses.service";
 import {ResultsAgeService} from "./resultsAge.service";
 import {Observable} from "rxjs";
-import {Router} from "@angular/router";
-import {Http} from "@angular/http";
 import {PiwikService} from "./piwik.service";
+
 
 class HeroDetailServiceSpy {
   getAge = jasmine.createSpy('getAge').and.callFake(
