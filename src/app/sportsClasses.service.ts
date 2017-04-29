@@ -33,13 +33,13 @@ export class SportsClassService {
 
   getNames(){
     return this.http.get(this.namesUrl)
-      .map(response => response.json())
+      .map(response => response.json().data)
       .catch(this.handleError);
   }
 
   private extractData(res: Response) {
     let body = res.json();
-    return body.map(sc => new SportsClass(sc)) || { };
+    return body.data.map(sc => new SportsClass(sc)) || { };
   }
 
   private handleError (error: Response | any) {
