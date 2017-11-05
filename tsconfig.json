@@ -1,3 +1,6 @@
+// this is only configured for the IDE.
+// The actual tsconfigs are in the src or e2e folders
+
 {
   "compileOnSave": false,
   "compilerOptions": {
