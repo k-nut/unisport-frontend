@@ -1,6 +1,6 @@
 import * as _ from "lodash";
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {state, trigger, style, transition, animate} from "@angular/animations";
 import {Subscription} from "rxjs/Subscription";
@@ -32,7 +32,7 @@ import {PiwikService} from "./piwik.service";
   ]
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   errorMessage: string;
   pagingStart: number;
   days = [
@@ -129,6 +129,7 @@ export class MainComponent implements OnInit {
     this.sportsClassService.getNames()
       .subscribe(
         names => {
+          console.log(names);
           this.classes = names;
         },
         error => this.errorMessage = <any>error
@@ -138,8 +139,7 @@ export class MainComponent implements OnInit {
     })
   }
 
-  // TODO: This breaks the tests because it is called before `ngOnInit`. Figure out why
-  // ngOnDestroy() {
-  //   this.sub.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 }

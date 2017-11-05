@@ -17,6 +17,10 @@ export class SportsClass {
   }
 }
 
+export interface ISportsClassResponse {
+  data: SportsClass[]
+}
+
 class Course {
   bookable : string;
   day: string;

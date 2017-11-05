@@ -1,12 +1,12 @@
 import { Injectable }              from '@angular/core';
-import {Http, Response, URLSearchParams}          from '@angular/http';
+import {HttpClient, HttpResponse, HttpParams, HttpErrorResponse} from '@angular/common/http';
 import * as _ from "lodash";
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { SportsClass, Day } from "./models";
+import {SportsClass, Day, ISportsClassResponse} from "./models";
 
 @Injectable()
 export class SportsClassService {
@@ -14,40 +14,38 @@ export class SportsClassService {
   private sportsClassUrl = `${this.baseUrl}/classes`;
   private namesUrl = `${this.baseUrl}/names`;
 
-  constructor (private http: Http) { }
+  constructor (private http: HttpClient) { }
 
   getSportsClasses(name:string, bookable:string = "false", selectedDays:Day[] = []): Observable<SportsClass[]> {
-    let params: URLSearchParams = new URLSearchParams();
-    params.set('name', name);
+    let params: HttpParams = new HttpParams();
+    params = params.set('name', name);
     if (bookable !== "false"){
-      params.set('bookable', bookable)
+      params = params.set('bookable', bookable)
     }
     if (selectedDays.length){
       const dayList = _.map(selectedDays, 'name').join(",");
-      params.set('days', dayList)
+      params = params.set('days', dayList)
     }
-    return this.http.get(this.sportsClassUrl, {search: params})
+    return this.http.get<ISportsClassResponse>(this.sportsClassUrl, {params})
       .map(this.extractData)
       .catch(this.handleError);
   }
 
   getNames(){
-    return this.http.get(this.namesUrl)
-      .map(response => response.json().data)
+    return this.http.get<{data: string[]}>(this.namesUrl)
+      .map(json => json.data)
       .catch(this.handleError);
   }
 
-  private extractData(res: Response) {
-    let body = res.json();
-    return body.data.map(sc => new SportsClass(sc)) || { };
+  private extractData(json: ISportsClassResponse) {
+    return json.data.map(sc => new SportsClass(sc)) || { };
   }
 
-  private handleError (error: Response | any) {
+  private handleError (error: HttpErrorResponse | any) {
     // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
+    if (error instanceof HttpErrorResponse) {
+      const err = error.error || JSON.stringify(error.error);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
