@@ -2,22 +2,15 @@ import {TestBed, async } from '@angular/core/testing';
 
 import {RouterTestingModule} from "@angular/router/testing";
 import {MainComponent} from "./main.component";
-import {HighlightDirective} from "./highlight.directive";
 import {FormsModule} from "@angular/forms";
 import {SportsClassService} from "./sportsClasses.service";
 import {ResultsAgeService} from "./resultsAge.service";
 import {Observable} from "rxjs";
 import {PiwikService} from "./piwik.service";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 
-class HeroDetailServiceSpy {
-  getAge = jasmine.createSpy('getAge').and.callFake(
-    () => Observable.of('10271')
-  );
-}
-
-
-describe('MainComponent', () => {
+ describe('MainComponent', () => {
   beforeEach(async(() => {
     const sportsClassesStub = {
       getSportsClasses: () => Observable.of([{'name': 'Handball', description: 'Handball description'}]),
@@ -41,16 +34,14 @@ describe('MainComponent', () => {
     });
 
     TestBed.configureTestingModule({
-      declarations: [
-        MainComponent,
-        HighlightDirective,
-      ],
+      declarations: [MainComponent],
       imports: [
         RouterTestingModule.withRoutes([
           { path: 'classes', component: MainComponent }
         ]),
         FormsModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 
@@ -60,7 +51,7 @@ describe('MainComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should create an input element', async(() => {
     const fixture = TestBed.createComponent(MainComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;

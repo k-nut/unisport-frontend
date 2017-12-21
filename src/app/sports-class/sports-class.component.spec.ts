@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SportsClassComponent } from './sports-class.component';
+import {HighlightDirective} from "../highlight.directive";
+import {SportsClass} from "../models";
 
 describe('SportsClassComponent', () => {
   let component: SportsClassComponent;
@@ -8,7 +10,7 @@ describe('SportsClassComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SportsClassComponent ]
+      declarations: [ HighlightDirective, SportsClassComponent ],
     })
     .compileComponents();
   }));
@@ -16,6 +18,7 @@ describe('SportsClassComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SportsClassComponent);
     component = fixture.componentInstance;
+    component.sportsClass = {} as SportsClass;
     fixture.detectChanges();
   });
 
