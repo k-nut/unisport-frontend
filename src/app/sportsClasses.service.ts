@@ -8,6 +8,24 @@ import 'rxjs/add/operator/map';
 
 import {SportsClass, Day, ISportsClassResponse} from "./models";
 
+import {HttpParameterCodec} from '@angular/common/http'
+
+/**
+ * A `HttpParameterCodec` that uses `encodeURIComponent` and `decodeURIComponent` to
+ * serialize and parse URL parameter keys and values.
+ *
+ * @stable
+ */
+export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
+  encodeKey(k: string): string { return encodeURIComponent(k); }
+
+  encodeValue(v: string): string { return encodeURIComponent(v); }
+
+  decodeKey(k: string): string { return decodeURIComponent(k); }
+
+  decodeValue(v: string) { return decodeURIComponent(v); }
+}
+
 @Injectable()
 export class SportsClassService {
   private baseUrl = 'https://backend.unisport.berlin'
@@ -17,7 +35,7 @@ export class SportsClassService {
   constructor (private http: HttpClient) { }
 
   getSportsClasses(name:string, bookable:string = "false", selectedDays:Day[] = []): Observable<SportsClass[]> {
-    let params: HttpParams = new HttpParams();
+    let params: HttpParams = new HttpParams({encoder: new WebHttpUrlEncodingCodec() });
     params = params.set('name', name);
     if (bookable !== "false"){
       params = params.set('bookable', bookable)
