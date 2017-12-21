@@ -115,8 +115,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.sportsClassService.getNames()
       .subscribe(
         names => {
-          console.log(names);
-          this.classes = names;
+          this.classes = names.sort();
         },
         error => this.errorMessage = <any>error
       );
