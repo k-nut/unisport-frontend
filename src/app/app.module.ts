@@ -10,6 +10,7 @@ import {MainComponent} from "./main.component";
 import {AboutComponent} from "./about.component";
 import {ImprintComponent} from "./imprint.component";
 import {HighlightDirective} from "./highlight.directive";
+import { SportsClassComponent } from './sports-class/sports-class.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {HighlightDirective} from "./highlight.directive";
     MainComponent,
     AboutComponent,
     ImprintComponent,
-    HighlightDirective
+    HighlightDirective,
+    SportsClassComponent
   ],
   imports: [
     BrowserModule,
