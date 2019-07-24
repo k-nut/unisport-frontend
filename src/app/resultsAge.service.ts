@@ -1,5 +1,5 @@
-import { Injectable }    from '@angular/core';
-import { HttpClient, HttpErrorResponse }  from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -12,7 +12,7 @@ export class ResultsAgeService {
   constructor (private http: HttpClient) { }
 
   getAge(): Observable<Date> {
-    return this.http.get(this.ageUrl, {responseType: "text"})
+    return this.http.get(this.ageUrl, {responseType: 'text'})
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -21,11 +21,11 @@ export class ResultsAgeService {
     // we need to add the `T` so that safari can parse this date
     // unfortunately this leads to JS parsing this as a UTC time
     // where it really is local time...
-    return new Date(res.replace(" ", "T"));
+    return new Date(res.replace(' ', 'T'));
   }
 
   private handleError (error: HttpErrorResponse | any) {
     console.log(error);
-    return Observable.throw("getting age failed")
+    return Observable.throw('getting age failed')
   }
 }

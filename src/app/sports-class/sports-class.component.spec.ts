@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SportsClassComponent } from './sports-class.component';
-import {HighlightDirective} from "../highlight.directive";
-import {SportsClass} from "../models";
+import {HighlightDirective} from '../highlight.directive';
+import {SportsClass} from '../models';
 
 describe('SportsClassComponent', () => {
   let component: SportsClassComponent;

@@ -12,7 +12,7 @@ export class SportsClass {
     this.courses = object.courses.map(c => new Course(c))
   }
 
-  toggleVisibility(){
+  toggleVisibility() {
     this.showDescription = !this.showDescription;
   }
 }
@@ -22,7 +22,7 @@ export interface ISportsClassResponse {
 }
 
 class Course {
-  bookable : string;
+  bookable: string;
   day: string;
   endDate: string;
   name: string;
@@ -30,7 +30,7 @@ class Course {
   price: string;
   startDate: string;
   time: string;
-  constructor(object){
+  constructor(object) {
     this.bookable = object.bookable;
     this.day = object.day;
     this.endDate = object.endDate;

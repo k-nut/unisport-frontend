@@ -120,11 +120,11 @@
   "defaultProject": "unisport-frontend",
   "schematics": {
     "@schematics/angular:component": {
-      "prefix": "app",
+      "prefix": "unisport",
       "styleext": "sass"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "unisport"
     }
   }
 }

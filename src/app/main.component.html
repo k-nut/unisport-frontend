@@ -41,8 +41,8 @@
     </div>
   </div>
 
-  <sports-class *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10"
+  <unisport-sports-class *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10"
                 class="sportsClass"
                 [sportsClass]="sportsClass"
-                [searchTerm]="searchTerm"></sports-class>
+                [searchTerm]="searchTerm"></unisport-sports-class>
 </div>

@@ -5,11 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import {RouterModule} from "@angular/router";
-import {MainComponent} from "./main.component";
-import {AboutComponent} from "./about.component";
-import {ImprintComponent} from "./imprint.component";
-import {HighlightDirective} from "./highlight.directive";
+import {RouterModule} from '@angular/router';
+import {MainComponent} from './main.component';
+import {AboutComponent} from './about.component';
+import {ImprintComponent} from './imprint.component';
+import {HighlightDirective} from './highlight.directive';
 import { SportsClassComponent } from './sports-class/sports-class.component';
 
 @NgModule({

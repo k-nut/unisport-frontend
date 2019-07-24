@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
 
-import {SportsClassService} from "./sportsClasses.service"
-import {SportsClass, Day} from "./models";
-import {ResultsAgeService} from "./resultsAge.service";
-import {PiwikService} from "./piwik.service";
+import {SportsClassService} from './sportsClasses.service'
+import {SportsClass, Day} from './models';
+import {ResultsAgeService} from './resultsAge.service';
+import {PiwikService} from './piwik.service';
 
 
 
 @Component({
-  selector: 'app-root',
+  selector: 'unisport-root',
   templateUrl: './main.component.html',
   styleUrls: ['main.component.sass'],
   providers: [SportsClassService, ResultsAgeService, PiwikService],
@@ -20,15 +20,15 @@ export class MainComponent implements OnInit, OnDestroy {
   errorMessage: string;
   pagingStart: number;
   days = [
-    new Day("Mo"),
-    new Day("Di"),
-    new Day("Mi"),
-    new Day("Do"),
-    new Day("Fr"),
-    new Day("Sa"),
-    new Day("So"),
+    new Day('Mo'),
+    new Day('Di'),
+    new Day('Mi'),
+    new Day('Do'),
+    new Day('Fr'),
+    new Day('Sa'),
+    new Day('So'),
   ];
-  searchTerm = "Handball";
+  searchTerm = 'Handball';
   sportsClasses: SportsClass[];
   pages: number[];
   currentPage: number;
@@ -36,7 +36,7 @@ export class MainComponent implements OnInit, OnDestroy {
     start: 1,
     end: 10
   };
-  bookable: string = "false";
+  bookable = 'false';
   classes: string[];
   lastUpdated: Date;
   private sub: Subscription;
@@ -48,7 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
               private piwikService: PiwikService) {
   }
 
-  setPage(page){
+  setPage(page) {
     this.currentPage = page;
     this.pagingStart = (page - 1) * 10;
 
@@ -60,13 +60,13 @@ export class MainComponent implements OnInit, OnDestroy {
 
   updateUrlParams(selectedDays = []) {
     const params = {};
-    if (this.searchTerm){
+    if (this.searchTerm) {
       params['searchTerm'] = this.searchTerm;
     }
     if (selectedDays.length) {
       params['selectedDays'] = selectedDays.map(day => day.name)
     }
-    if (this.bookable !== "false") {
+    if (this.bookable !== 'false') {
       params['bookable'] = this.bookable
     }
     this.router.navigate([], {
@@ -93,23 +93,23 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.queryParams.subscribe((params: Params) => {
-      if (params['searchTerm']){
+      if (params['searchTerm']) {
         this.searchTerm = params['searchTerm']
       }
-      if (params['selectedDays']){
+      if (params['selectedDays']) {
         const days = params['selectedDays'].split(',')
         days.forEach((day) => {
-          this.days.find(d => d.name == day).selected = true;
+          this.days.find(d => d.name === day).selected = true;
         })
       }
-      if (params['bookable']){
+      if (params['bookable']) {
         this.bookable = params['bookable']
       }
     });
-    this.sportsClasses =[];
+    this.sportsClasses = [];
     this.pagingStart = 0;
     this.getSportsClasses();
-    this.pages = [...Array(10).keys()].map(i => i+1);
+    this.pages = [...Array(10).keys()].map(i => i + 1);
     this.currentPage = 1;
     this.sportsClassService.getNames()
       .subscribe(

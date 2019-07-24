@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SportsClass} from "../models";
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {SportsClass} from '../models';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
-  selector: 'sports-class',
+  selector: 'unisport-sports-class',
   template: `
   <h2> {{ sportsClass.name }} </h2>
 
@@ -11,8 +11,9 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 
   <button (click)="sportsClass.toggleVisibility()">Beschreibung anzeigen</button>
 
-  <p class="details"
-     [myHighlight]="searchTerm"
+  <p unisportHighlight
+     class="details"
+     [word]="searchTerm"
      [text]="sportsClass.description"
      *ngIf="sportsClass.showDescription"
      [@fadeInOut]></p>
@@ -59,11 +60,11 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
       state('*', style({ 'overflow-y': 'hidden' })),
       state('void', style({ 'overflow-y': 'hidden' })),
       transition(':enter', [   // :enter is alias to 'void => *'
-        style({height:0}),
-        animate(250, style({height:'*'}))
+        style({height: 0}),
+        animate(250, style({height: '*'}))
       ]),
       transition(':leave', [   // :leave is alias to '* => void'
-        animate(250, style({height:0}))
+        animate(250, style({height: 0}))
       ])
     ])
   ]

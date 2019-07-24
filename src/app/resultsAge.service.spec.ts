@@ -1,8 +1,8 @@
 import {fakeAsync, getTestBed, TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpTestingController} from '@angular/common/http/testing';
-import {ResultsAgeService} from "./resultsAge.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {ResultsAgeService} from './resultsAge.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('MockBackend HeroService Example', () => {
   beforeEach(() => {
@@ -29,8 +29,8 @@ describe('MockBackend HeroService Example', () => {
       expect(result.getFullYear()).toEqual(2016);
       expect(result.getMonth()).toEqual(3);
     });
-    const req = this.httpMock.expectOne("https://backend.unisport.berlin/age");
-    expect(req.request.method).toBe("GET");
-    req.flush("2016-04-07 12:00:00.1234")
+    const req = this.httpMock.expectOne('https://backend.unisport.berlin/age');
+    expect(req.request.method).toBe('GET');
+    req.flush('2016-04-07 12:00:00.1234')
   }));
 });
