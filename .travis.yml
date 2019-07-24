@@ -10,4 +10,5 @@ env:
   - TRAVIS=true
 
 script:
-  - npm run ci-test
+  - ng e2e --protractor-config=./e2e/protractor-ci.conf.js
+
