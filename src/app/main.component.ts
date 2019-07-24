@@ -1,5 +1,3 @@
-import * as _ from "lodash";
-
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
@@ -66,7 +64,7 @@ export class MainComponent implements OnInit, OnDestroy {
       params['searchTerm'] = this.searchTerm;
     }
     if (selectedDays.length) {
-      params['selectedDays'] = _.map(selectedDays, 'name')
+      params['selectedDays'] = selectedDays.map(day => day.name)
     }
     if (this.bookable !== "false") {
       params['bookable'] = this.bookable
@@ -79,13 +77,14 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
   getSportsClasses() {
-    const selectedDays = _.filter(this.days, 'selected');
+    const selectedDays = this.days.filter(day => day.selected);
     this.updateUrlParams(selectedDays);
     this.sportsClassService.getSportsClasses(this.searchTerm, this.bookable, selectedDays)
       .subscribe(
         sportsClasses => {
           this.sportsClasses = sportsClasses;
-          this.pages = _.range(1, Math.ceil(sportsClasses.length / 10) + 1);
+          const limit = Math.ceil(sportsClasses.length / 10);
+          this.pages = [...Array(limit).keys()].map(x => x + 1);
           this.piwikService.trackSiteSearch(this.searchTerm, sportsClasses.length);
           this.setPage(1)
         },
@@ -110,7 +109,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.sportsClasses =[];
     this.pagingStart = 0;
     this.getSportsClasses();
-    this.pages = _.range(1, 10);
+    this.pages = [...Array(10).keys()].map(i => i+1);
     this.currentPage = 1;
     this.sportsClassService.getNames()
       .subscribe(

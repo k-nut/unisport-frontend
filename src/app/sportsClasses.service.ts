@@ -1,6 +1,5 @@
 import { Injectable }              from '@angular/core';
 import {HttpClient, HttpResponse, HttpParams, HttpErrorResponse} from '@angular/common/http';
-import * as _ from "lodash";
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -40,8 +39,8 @@ export class SportsClassService {
     if (bookable !== "false"){
       params = params.set('bookable', bookable)
     }
-    if (selectedDays.length){
-      const dayList = _.map(selectedDays, 'name').join(",");
+    if (selectedDays.length) {
+      const dayList = selectedDays.map(day => day.name).join(',');
       params = params.set('days', dayList)
     }
     return this.http.get<ISportsClassResponse>(this.sportsClassUrl, {params})
