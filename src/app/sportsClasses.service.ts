@@ -1,11 +1,11 @@
-import { Injectable }              from '@angular/core';
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse, HttpParams, HttpErrorResponse} from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import {SportsClass, Day, ISportsClassResponse} from "./models";
+import {SportsClass, Day, ISportsClassResponse} from './models';
 
 import {HttpParameterCodec} from '@angular/common/http'
 
@@ -33,10 +33,10 @@ export class SportsClassService {
 
   constructor (private http: HttpClient) { }
 
-  getSportsClasses(name:string, bookable:string = "false", selectedDays:Day[] = []): Observable<SportsClass[]> {
+  getSportsClasses(name: string, bookable: string = 'false', selectedDays: Day[] = []): Observable<SportsClass[]> {
     let params: HttpParams = new HttpParams({encoder: new WebHttpUrlEncodingCodec() });
     params = params.set('name', name);
-    if (bookable !== "false"){
+    if (bookable !== 'false') {
       params = params.set('bookable', bookable)
     }
     if (selectedDays.length) {
@@ -48,14 +48,14 @@ export class SportsClassService {
       .catch(this.handleError);
   }
 
-  getNames(){
+  getNames() {
     return this.http.get<{data: string[]}>(this.namesUrl)
       .map(json => json.data)
       .catch(this.handleError);
   }
 
   private extractData(json: ISportsClassResponse) {
-    return json.data.map(sc => new SportsClass(sc)) || { };
+    return json.data.map(sc => new SportsClass(sc));
   }
 
   private handleError (error: HttpErrorResponse | any) {
