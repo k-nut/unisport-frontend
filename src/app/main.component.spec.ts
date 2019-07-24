@@ -5,7 +5,7 @@ import {MainComponent} from './main.component';
 import {FormsModule} from '@angular/forms';
 import {SportsClassService} from './sportsClasses.service';
 import {ResultsAgeService} from './resultsAge.service';
-import {Observable} from 'rxjs';
+import {of} from 'rxjs';
 import {PiwikService} from './piwik.service';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 
@@ -13,11 +13,11 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
  describe('MainComponent', () => {
   beforeEach(async(() => {
     const sportsClassesStub = {
-      getSportsClasses: () => Observable.of([{'name': 'Handball', description: 'Handball description'}]),
-      getNames: () => Observable.of(['Kicker', 'Judo', 'Tennis'])
+      getSportsClasses: () => of([{'name': 'Handball', description: 'Handball description'}]),
+      getNames: () => of(['Kicker', 'Judo', 'Tennis'])
     };
     const ageStub = {
-      getAge: () =>  Observable.of(new Date()),
+      getAge: () =>  of(new Date()),
     };
     const piwikStub = {
       trackSiteSearch: () =>  null,
