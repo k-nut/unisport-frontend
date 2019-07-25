@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import {SportsClassService} from './sportsClasses.service'
+import {SportsClassService} from './sportsClasses.service';
 import {SportsClass, Day} from './models';
 import {ResultsAgeService} from './resultsAge.service';
 import {PiwikService} from './piwik.service';
@@ -55,7 +55,7 @@ export class MainComponent implements OnInit, OnDestroy {
     const offset = (this.currentPage - 1) * 10;
     const lastResult = offset + 10;
     this.pagination.start = offset + 1;
-    this.pagination.end = lastResult > this.sportsClasses.length ? this.sportsClasses.length : lastResult
+    this.pagination.end = lastResult > this.sportsClasses.length ? this.sportsClasses.length : lastResult;
   }
 
   updateUrlParams(selectedDays = []) {
@@ -86,9 +86,9 @@ export class MainComponent implements OnInit, OnDestroy {
           const limit = Math.ceil(sportsClasses.length / 10);
           this.pages = [...Array(limit).keys()].map(x => x + 1);
           this.piwikService.trackSiteSearch(this.searchTerm, sportsClasses.length);
-          this.setPage(1)
+          this.setPage(1);
         },
-        error => this.errorMessage = <any>error);
+        error => this.errorMessage = error as any);
   }
 
   ngOnInit() {
@@ -100,7 +100,7 @@ export class MainComponent implements OnInit, OnDestroy {
         const days = params['selectedDays'].split(',')
         days.forEach((day) => {
           this.days.find(d => d.name === day).selected = true;
-        })
+        });
       }
       if (params['bookable']) {
         this.bookable = params['bookable']
@@ -116,14 +116,16 @@ export class MainComponent implements OnInit, OnDestroy {
         names => {
           this.classes = names.sort();
         },
-        error => this.errorMessage = <any>error
+        error => this.errorMessage = error as any
       );
     this.resultsAgeService.getAge().subscribe(age => {
-      this.lastUpdated = age
-    })
+      this.lastUpdated = age;
+    });
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (this.sub){
+      this.sub.unsubscribe();
+    }
   }
 }
