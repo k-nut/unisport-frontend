@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import {SportsClassService} from './sportsClasses.service';
-import {SportsClass, Day} from './models';
-import {ResultsAgeService} from './resultsAge.service';
-import {PiwikService} from './piwik.service';
+import {SportsClassService} from '../sportsClasses.service';
+import {SportsClass, Day} from '../models';
+import {ResultsAgeService} from '../resultsAge.service';
+import {PiwikService} from '../piwik.service';
+import {first} from 'rxjs/operators';
 
 
 
@@ -13,7 +14,6 @@ import {PiwikService} from './piwik.service';
   selector: 'unisport-root',
   templateUrl: './main.component.html',
   styleUrls: ['main.component.sass'],
-  providers: [SportsClassService, ResultsAgeService, PiwikService],
 })
 
 export class MainComponent implements OnInit, OnDestroy {
@@ -43,7 +43,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   constructor(private sportsClassService: SportsClassService,
               private resultsAgeService: ResultsAgeService,
-              private route: ActivatedRoute,
+              private activatedRoute: ActivatedRoute,
               private router: Router,
               private piwikService: PiwikService) {
   }
@@ -59,19 +59,14 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   updateUrlParams(selectedDays = []) {
-    const params = {};
-    if (this.searchTerm) {
-      params['searchTerm'] = this.searchTerm;
-    }
-    if (selectedDays.length) {
-      params['selectedDays'] = selectedDays.map(day => day.name)
-    }
-    if (this.bookable !== 'false') {
-      params['bookable'] = this.bookable
-    }
+    const params = {
+      searchTerm: this.searchTerm,
+      selectedDays: selectedDays.map(day => day.name),
+      bookable: this.bookable,
+    };
     this.router.navigate([], {
       queryParams: params,
-      relativeTo: this.route
+      relativeTo: this.activatedRoute
     });
   }
 
@@ -92,19 +87,18 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.sub = this.route.queryParams.subscribe((params: Params) => {
-      if (params['searchTerm']) {
-        this.searchTerm = params['searchTerm']
-      }
-      if (params['selectedDays']) {
-        const days = params['selectedDays'].split(',')
-        days.forEach((day) => {
-          this.days.find(d => d.name === day).selected = true;
-        });
-      }
-      if (params['bookable']) {
-        this.bookable = params['bookable']
-      }
+    this.activatedRoute.queryParamMap
+      .pipe(first())
+      .subscribe((params) => {
+      this.searchTerm = params.get('searchTerm') || this.searchTerm;
+      this.bookable = params.get('bookable') || this.bookable;
+      const selectedDays = params.getAll('selectedDays');
+      this.days = this.days.map(day => {
+        return {
+          ...day,
+          selected: selectedDays.includes(day.name)
+        };
+      });
     });
     this.sportsClasses = [];
     this.pagingStart = 0;
@@ -112,13 +106,16 @@ export class MainComponent implements OnInit, OnDestroy {
     this.pages = [...Array(10).keys()].map(i => i + 1);
     this.currentPage = 1;
     this.sportsClassService.getNames()
+      .pipe(first())
       .subscribe(
         names => {
           this.classes = names.sort();
         },
         error => this.errorMessage = error as any
       );
-    this.resultsAgeService.getAge().subscribe(age => {
+    this.resultsAgeService.getAge()
+      .pipe(first())
+      .subscribe(age => {
       this.lastUpdated = age;
     });
   }

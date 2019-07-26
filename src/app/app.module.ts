@@ -6,23 +6,20 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {RouterModule} from '@angular/router';
-import {MainComponent} from './main.component';
+import {MainComponent} from './main-module/main.component';
 import {AboutComponent} from './about.component';
 import {ImprintComponent} from './imprint.component';
-import {HighlightDirective} from './highlight.directive';
-import { SportsClassComponent } from './sports-class/sports-class.component';
+import {MainModule} from './main-module/main.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     AboutComponent,
     ImprintComponent,
-    HighlightDirective,
-    SportsClassComponent
   ],
   imports: [
     BrowserModule,
+    MainModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
