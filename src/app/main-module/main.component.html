@@ -1,7 +1,10 @@
 <div class="container">
-  <form (ngSubmit)="getSportsClasses()" style='display: inline-block'>
-    <input class='search' type="text" list="classes" name="searchTerm" [(ngModel)]="searchTerm" placeholder="Suchen...">
-    <input type="submit" value="Suchen" />
+  <form (ngSubmit)="getSportsClasses()">
+    <div class="mainSearch">
+      <input class='search' type="text" list="classes" name="searchTerm" [(ngModel)]="searchTerm"
+             placeholder="Suchen...">
+      <input type="submit" value="Suchen"/>
+    </div>
     <datalist id="classes">
       <option *ngFor="let class of classes">{{class}}</option>
     </datalist>
