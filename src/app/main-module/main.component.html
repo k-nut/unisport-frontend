@@ -7,10 +7,12 @@
     </datalist>
 
     <div class="additionalFilters">
-      Angeboten am:
-      <label *ngFor="let day of days" class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="day.selected" name="{{day.name}}"/>{{day.name}}
-      </label>
+      <div>
+        Angeboten am:
+        <label *ngFor="let day of days" class="checkbox-inline">
+          <input type="checkbox" [(ngModel)]="day.selected" name="{{day.name}}"/>{{day.name}}
+        </label>
+      </div>
 
       <select [(ngModel)]="bookable" name="bookableOptions">
         <option value="false">Alle Kurse</option>
