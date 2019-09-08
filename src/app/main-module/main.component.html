@@ -34,23 +34,37 @@
 
   </form>
 
-  <p style='float: right'> Datenstand: <span id='lastUpadated'>{{lastUpdated | date : "dd.MM.yyyy"}}</span> </p>
+  <p style='float: right'> Datenstand: <span id='lastUpadated'>{{lastUpdated | date : "dd.MM.yyyy"}}</span></p>
 
+  <ng-template [ngIf]="hasData" [ngIfElse]="noData">
+    <div class="results-count">{{ sportsClasses.length }} Kurse gefunden</div>
 
-  <div class="pagination">
-    Seite:
-    <ul>
-      <li *ngFor="let page of pages">
-        <button [ngClass]="{'selected': currentPage === page}" (click)="setPage(page)">{{page}}</button>
-      </li>
-    </ul>
-    <div>
-      Zeige Ergebnisse {{ pagination.start }} bis {{ pagination.end }} von {{sportsClasses.length}}
+    <unisport-sports-class
+      *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10"
+      class="sportsClass"
+      [sportsClass]="sportsClass"
+      [searchTerm]="searchTerm"></unisport-sports-class>
+
+    <div class="pagination">
+      Seite:
+      <ul>
+        <li *ngFor="let page of pages">
+          <button [ngClass]="{'selected': currentPage === page}" (click)="setPage(page)">{{page}}</button>
+        </li>
+      </ul>
     </div>
-  </div>
+  </ng-template>
 
-  <unisport-sports-class *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10"
-                class="sportsClass"
-                [sportsClass]="sportsClass"
-                [searchTerm]="searchTerm"></unisport-sports-class>
+  <ng-template #noData>
+    <ng-template [ngIf]="!searchTerm" [ngIfElse]="noResults">
+      <div class="disclaimer">
+        Willkommen auf unisport.berlin. Durchsuche alle Unisportkurse von FU, HU, TU, HTW, Beuth und der Uni Potsdam
+        an einer Stelle!
+      </div>
+    </ng-template>
+  </ng-template>
+
+  <ng-template #noResults>
+    Keine Ergebniss gefunden
+  </ng-template>
 </div>

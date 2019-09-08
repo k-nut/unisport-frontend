@@ -28,7 +28,7 @@ export class MainComponent implements OnInit, OnDestroy {
     new Day('Sa'),
     new Day('So'),
   ];
-  searchTerm = 'Handball';
+  searchTerm = '';
   sportsClasses: SportsClass[];
   pages: number[];
   currentPage: number;
@@ -39,6 +39,8 @@ export class MainComponent implements OnInit, OnDestroy {
   bookable = 'false';
   classes: string[];
   lastUpdated: Date;
+  loading = false;
+  hasData = false;
   private sub: Subscription;
 
   constructor(private sportsClassService: SportsClassService,
@@ -72,14 +74,21 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
   getSportsClasses() {
+    if (this.searchTerm === '') {
+      this.hasData = false;
+      return;
+    }
     const selectedDays = this.days.filter(day => day.selected);
     this.updateUrlParams(selectedDays);
+    this.loading = true;
     this.sportsClassService.getSportsClasses(this.searchTerm, this.bookable, selectedDays)
       .subscribe(
         sportsClasses => {
           this.sportsClasses = sportsClasses;
           const limit = Math.ceil(sportsClasses.length / 10);
           this.pages = [...Array(limit).keys()].map(x => x + 1);
+          this.hasData = sportsClasses.length > 0;
+          this.loading = false;
           this.piwikService.trackSiteSearch(this.searchTerm, sportsClasses.length);
           this.setPage(1);
         },
@@ -121,7 +130,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub){
+    if (this.sub) {
       this.sub.unsubscribe();
     }
   }
