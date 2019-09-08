@@ -14,11 +14,19 @@
         </label>
       </div>
 
-      <select [(ngModel)]="bookable" name="bookableOptions">
-        <option value="false">Alle Kurse</option>
-        <option value="true">Nur buchbare</option>
-        <option value="waitingList">Buchbar &amp; Warteliste</option>
-      </select>
+
+      <div>
+        Verfügbarkeit:
+        <label>
+          <input [(ngModel)]="bookable" type="radio" value="false" name="bookable"/> Alle Kurse
+        </label>
+        <label>
+          <input [(ngModel)]="bookable" type="radio" value="true" name="bookable"/> Nur buchbare
+        </label>
+        <label>
+          <input [(ngModel)]="bookable" type="radio" value="waitingList" name="bookable"/> Buchbar & Warteliste
+        </label>
+      </div>
     </div>
 
   </form>
