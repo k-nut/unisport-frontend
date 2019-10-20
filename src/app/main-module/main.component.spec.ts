@@ -4,7 +4,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {MainComponent} from './main.component';
 import {FormsModule} from '@angular/forms';
 import {SportsClassService} from '../sportsClasses.service';
-import {ResultsAgeService} from '../resultsAge.service';
 import {of} from 'rxjs';
 import {PiwikService} from '../piwik.service';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
@@ -20,9 +19,6 @@ describe('MainComponent', () => {
       getSportsClasses: () => of([{name: 'Handball', description: 'Handball description'}]),
       getNames: () => of(['Kicker', 'Judo', 'Tennis'])
     };
-    const ageStub = {
-      getAge: () => of(new Date()),
-    };
     const piwikStub = {
       trackSiteSearch: () => null,
     };
@@ -34,7 +30,6 @@ describe('MainComponent', () => {
       ],
       providers: [
         {provide: SportsClassService, useValue: sportsClassesStub},
-        {provide: ResultsAgeService, useValue: ageStub},
         {provide: PiwikService, useValue: piwikStub},
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

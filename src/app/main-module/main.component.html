@@ -34,8 +34,6 @@
 
   </form>
 
-  <p style='float: right'> Datenstand: <span id='lastUpadated'>{{lastUpdated | date : "dd.MM.yyyy"}}</span></p>
-
   <ng-template [ngIf]="hasData" [ngIfElse]="noData">
     <div class="results-count">{{ sportsClasses.length }} Kurse gefunden</div>
 

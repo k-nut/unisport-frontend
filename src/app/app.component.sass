@@ -1,20 +1,25 @@
-$header-background: #eeeeee
+$header-background: rgb(104, 198, 14)
 
 header
   background: $header-background
-  padding: .5rem
-  border-bottom: 1px solid darken($header-background, 10)
+  padding: .5rem 2rem
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  margin-top: -1rem
 
   h1, nav
     display: inline-block
+    margin-top: 1rem
 
   nav ul li
     list-style-type: none
     display: inline-block
+    margin-left: 2rem
 
   a
     text-decoration: none
-    margin-left: 4ch
-    color: black
+    color: white
+    display: inline-flex
     &.active
       font-weight: bold

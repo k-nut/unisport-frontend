@@ -4,7 +4,6 @@ import {Subscription} from 'rxjs/Subscription';
 
 import {SportsClassService} from '../sportsClasses.service';
 import {SportsClass, Day} from '../models';
-import {ResultsAgeService} from '../resultsAge.service';
 import {PiwikService} from '../piwik.service';
 import {first} from 'rxjs/operators';
 
@@ -38,13 +37,11 @@ export class MainComponent implements OnInit, OnDestroy {
   };
   bookable = 'false';
   classes: string[];
-  lastUpdated: Date;
   loading = false;
   hasData = false;
   private sub: Subscription;
 
   constructor(private sportsClassService: SportsClassService,
-              private resultsAgeService: ResultsAgeService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private piwikService: PiwikService) {
@@ -122,11 +119,6 @@ export class MainComponent implements OnInit, OnDestroy {
         },
         error => this.errorMessage = error as any
       );
-    this.resultsAgeService.getAge()
-      .pipe(first())
-      .subscribe(age => {
-      this.lastUpdated = age;
-    });
   }
 
   ngOnDestroy() {

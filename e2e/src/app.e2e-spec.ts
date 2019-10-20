@@ -7,8 +7,8 @@ describe('unisport-frontend App', () => {
     page = new UnisportFrontendPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should have a aria label for the heading svg', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Berliner Unisport');
+    expect(page.getHeadingAriaLabel()).toEqual('unisport.berlin');
   });
 });

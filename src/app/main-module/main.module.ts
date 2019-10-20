@@ -6,7 +6,6 @@ import {SportsClassComponent} from '../sports-class/sports-class.component';
 import {HighlightDirective} from '../highlight.directive';
 import {HttpClientModule} from '@angular/common/http';
 import {SportsClassService} from '../sportsClasses.service';
-import {ResultsAgeService} from '../resultsAge.service';
 import {PiwikService} from '../piwik.service';
 
 @NgModule({
@@ -20,7 +19,7 @@ import {PiwikService} from '../piwik.service';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [SportsClassService, ResultsAgeService, PiwikService],
+  providers: [SportsClassService, PiwikService],
   exports: [
     MainComponent
   ]
