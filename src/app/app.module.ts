@@ -10,12 +10,14 @@ import {MainComponent} from './main-module/main.component';
 import {AboutComponent} from './about.component';
 import {ImprintComponent} from './imprint.component';
 import {MainModule} from './main-module/main.module';
+import { ClassListComponent } from './class-list/class-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     ImprintComponent,
+    ClassListComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,10 @@ import {MainModule} from './main-module/main.module';
       {
         path: 'classes',
         component: MainComponent
+      },
+      {
+        path: 'class-list',
+        component: ClassListComponent
       },
       {
         path: 'about',
