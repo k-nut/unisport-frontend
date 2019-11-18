@@ -1,10 +1,8 @@
 import {ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {SportsClassService} from '../sportsClasses.service';
 import {first} from 'rxjs/operators';
-import {latLng, Layer, marker, tileLayer} from 'leaflet';
+import {icon, latLng, Layer, marker, tileLayer} from 'leaflet';
 import {Location, SportsClass} from '../models';
-import 'leaflet/dist/images/marker-shadow.png';
-import 'leaflet/dist/images/marker-icon.png';
 
 
 @Component({
@@ -45,7 +43,14 @@ export class LocationMapComponent implements OnInit {
         locations => {
           this.locations = locations;
           this.layers = locations.map(l =>
-            marker([l.lat, l.lon] )
+            marker([l.lat, l.lon], {
+              icon: icon({
+                iconSize: [25, 41],
+                iconAnchor: [13, 41],
+                iconUrl: '/assets/leaflet/marker-icon.png',
+                shadowUrl: '/assets/leaflet/marker-shadow.png',
+              })
+            })
               .on('click', () =>
                 this.zone.run(() => this.onMarkerClick(l))
               )
