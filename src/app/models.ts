@@ -24,20 +24,18 @@ export interface ISportsClassResponse {
 class Course {
   bookable: string;
   day: string;
-  endDate: string;
   name: string;
   place: string;
   price: string;
-  startDate: string;
+  timeframe: string;
   time: string;
   constructor(object) {
     this.bookable = object.bookable;
     this.day = object.day;
-    this.endDate = object.endDate;
+    this.timeframe = object.timeframe;
     this.name = object.name;
     this.place = object.place;
     this.price = object.price;
-    this.startDate = object.startDate;
     this.time = object.time;
   }
 }

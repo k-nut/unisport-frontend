@@ -45,7 +45,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         <td> {{course.name }}</td>
         <td> {{course.day }}</td>
         <td> {{course.time }}</td>
-        <td> {{course.startDate}}-{{course.endDate}}</td>
+        <td> {{course.timeframe}}</td>
         <td> {{course.place }}</td>
         <td> {{course.price }}</td>
         <td> {{course.bookable }}</td>
