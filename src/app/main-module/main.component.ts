@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 
-import {SportsClassService} from '../sportsClasses.service';
-import {SportsClass, Day} from '../models';
+import {BookingStatus, SportsClassService} from '../sportsClasses.service';
+import {Day, SportsClass} from '../models';
 import {PiwikService} from '../piwik.service';
 import {first} from 'rxjs/operators';
-
 
 
 @Component({
@@ -35,7 +34,8 @@ export class MainComponent implements OnInit, OnDestroy {
     start: 1,
     end: 10
   };
-  bookable = 'false';
+  bookable: BookingStatus = BookingStatus.all;
+  BookingStatus: typeof BookingStatus = BookingStatus;
   classes: string[];
   loading = false;
   hasData = false;
@@ -78,7 +78,11 @@ export class MainComponent implements OnInit, OnDestroy {
     const selectedDays = this.days.filter(day => day.selected);
     this.updateUrlParams(selectedDays);
     this.loading = true;
-    this.sportsClassService.getSportsClasses(this.searchTerm, this.bookable, selectedDays)
+    this.sportsClassService.getSportsClasses({
+      name: this.searchTerm,
+      bookable: this.bookable,
+      days: selectedDays
+    })
       .subscribe(
         sportsClasses => {
           this.sportsClasses = sportsClasses;
@@ -97,7 +101,7 @@ export class MainComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe((params) => {
       this.searchTerm = params.get('searchTerm') || this.searchTerm;
-      this.bookable = params.get('bookable') || this.bookable;
+      this.bookable = params.get('bookable') as BookingStatus || this.bookable;
       const selectedDays = params.getAll('selectedDays');
       this.days = this.days.map(day => {
         return {
