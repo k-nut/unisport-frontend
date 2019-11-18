@@ -1,0 +1,22 @@
+<div style="height: 60vh;"
+     leaflet
+     [leafletOptions]="options"
+     [leafletLayers]="layers">
+</div>
+
+<div class="container">
+  <h2>{{location?.name}}</h2>
+
+
+  <ul class="class-list">
+    <li *ngFor="let sportsClass of classes">
+      <a [routerLink]="['/classes']" [queryParams]="{searchTerm: sportsClass.name}">
+        {{sportsClass.name}}
+      </a>
+    </li>
+  </ul>
+
+  <div *ngIf="location && !classes.length">
+    Für diesen Ort sind keine Kurse bekannt.
+  </div>
+</div>

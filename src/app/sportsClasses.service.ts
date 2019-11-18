@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import {SportsClass, Day, ISportsClassResponse} from './models';
+import {SportsClass, Day, ISportsClassResponse, Location} from './models';
 
 import {HttpParameterCodec} from '@angular/common/http'
 
@@ -33,6 +33,7 @@ export enum BookingStatus {
 
 export interface ISearchOptions {
   name?: string;
+  location?: string;
   bookable?: BookingStatus;
   days?: Day[];
 }
@@ -42,8 +43,9 @@ export class SportsClassService {
   private baseUrl = 'https://backend.unisport.berlin'
   private sportsClassUrl = `${this.baseUrl}/classes`;
   private namesUrl = `${this.baseUrl}/names`;
+  private locationsUrl =  `${this.baseUrl}/locations`;
 
-  constructor (private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getSportsClasses(options: ISearchOptions = {bookable: BookingStatus.all}): Observable<SportsClass[]> {
     let params: HttpParams = new HttpParams({encoder: new WebHttpUrlEncodingCodec() });
@@ -57,6 +59,8 @@ export class SportsClassService {
       const dayList = options.days.map(day => day.name).join(',');
       params = params.set('days', dayList);
     }
+    if (options.location) {
+      params = params.set('location', options.location);
     }
     return this.http.get<ISportsClassResponse>(this.sportsClassUrl, {params})
       .map(this.extractData)
@@ -84,5 +88,11 @@ export class SportsClassService {
     }
     console.error(errMsg);
     return Observable.throw(errMsg);
+  }
+
+  getLocations() {
+    return this.http.get<{data: Location[]}>(this.locationsUrl)
+      .map(json => json.data)
+      .catch(this.handleError);
   }
 }

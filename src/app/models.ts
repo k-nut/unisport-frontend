@@ -50,3 +50,8 @@ export class Day {
   }
 }
 
+export class Location {
+  name: string;
+  lat: number;
+  lon: number;
+}

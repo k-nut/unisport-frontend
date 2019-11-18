@@ -29,7 +29,8 @@
               "src/_redirects"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           },
