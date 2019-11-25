@@ -1,7 +1,7 @@
 <div class="container">
   <p>Hier findest du zur Inspiration alle Kurse in alphabetischer Reihenfolge.</p>
 
-  <ul>
+  <ul class="class-list">
     <li *ngFor="let className of classes">
       <a [routerLink]="['/classes']" [queryParams]="{searchTerm: className}">
         {{className}}

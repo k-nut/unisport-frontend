@@ -11,6 +11,8 @@ import {AboutComponent} from './about.component';
 import {ImprintComponent} from './imprint.component';
 import {MainModule} from './main-module/main.module';
 import { ClassListComponent } from './class-list/class-list.component';
+import { LocationMapComponent } from './location-map/location-map.component';
+import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { ClassListComponent } from './class-list/class-list.component';
     AboutComponent,
     ImprintComponent,
     ClassListComponent,
+    LocationMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +28,7 @@ import { ClassListComponent } from './class-list/class-list.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    LeafletModule.forRoot(), // TODO: Create separete map module? Does this create a new bundle and improve load time?
     RouterModule.forRoot([
       {
         path: 'classes',
@@ -33,6 +37,10 @@ import { ClassListComponent } from './class-list/class-list.component';
       {
         path: 'class-list',
         component: ClassListComponent
+      },
+      {
+        path: 'map',
+        component: LocationMapComponent,
       },
       {
         path: 'about',

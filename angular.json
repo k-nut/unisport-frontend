@@ -26,10 +26,16 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/_redirects"
+              "src/_redirects",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "assets/leaflet/"
+              }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           },

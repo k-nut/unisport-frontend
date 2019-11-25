@@ -21,13 +21,13 @@
       <div>
         Verfügbarkeit:
         <label>
-          <input [(ngModel)]="bookable" type="radio" value="false" name="bookable"/> Alle Kurse
+          <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.all}}" name="bookable"/> Alle Kurse
         </label>
         <label>
-          <input [(ngModel)]="bookable" type="radio" value="true" name="bookable"/> Nur buchbare
+          <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.bookable}}" name="bookable"/> Nur buchbare
         </label>
         <label>
-          <input [(ngModel)]="bookable" type="radio" value="waitingList" name="bookable"/> Buchbar & Warteliste
+          <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.withWaitList}}" name="bookable"/> Buchbar & Warteliste
         </label>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import {SportsClass, Day, ISportsClassResponse} from './models';
+import {SportsClass, Day, ISportsClassResponse, Location} from './models';
 
 import {HttpParameterCodec} from '@angular/common/http'
 
@@ -25,23 +25,42 @@ export class WebHttpUrlEncodingCodec implements HttpParameterCodec {
   decodeValue(v: string) { return decodeURIComponent(v); }
 }
 
+export enum BookingStatus {
+  all = 'false',
+  bookable = 'true',
+  withWaitList = 'waitingList'
+}
+
+export interface ISearchOptions {
+  name?: string;
+  location?: string;
+  bookable?: BookingStatus;
+  days?: Day[];
+}
+
 @Injectable()
 export class SportsClassService {
   private baseUrl = 'https://backend.unisport.berlin'
   private sportsClassUrl = `${this.baseUrl}/classes`;
   private namesUrl = `${this.baseUrl}/names`;
+  private locationsUrl =  `${this.baseUrl}/locations`;
 
-  constructor (private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getSportsClasses(name: string, bookable: string = 'false', selectedDays: Day[] = []): Observable<SportsClass[]> {
+  getSportsClasses(options: ISearchOptions = {bookable: BookingStatus.all}): Observable<SportsClass[]> {
     let params: HttpParams = new HttpParams({encoder: new WebHttpUrlEncodingCodec() });
-    params = params.set('name', name);
-    if (bookable !== 'false') {
-      params = params.set('bookable', bookable)
+    if (options.name) {
+      params = params.set('name', options.name);
     }
-    if (selectedDays.length) {
-      const dayList = selectedDays.map(day => day.name).join(',');
-      params = params.set('days', dayList)
+    if (options.bookable && options.bookable !== BookingStatus.all) {
+      params = params.set('bookable', options.bookable);
+    }
+    if (options.days && options.days.length) {
+      const dayList = options.days.map(day => day.name).join(',');
+      params = params.set('days', dayList);
+    }
+    if (options.location) {
+      params = params.set('location', options.location);
     }
     return this.http.get<ISportsClassResponse>(this.sportsClassUrl, {params})
       .map(this.extractData)
@@ -69,5 +88,11 @@ export class SportsClassService {
     }
     console.error(errMsg);
     return Observable.throw(errMsg);
+  }
+
+  getLocations() {
+    return this.http.get<{data: Location[]}>(this.locationsUrl)
+      .map(json => json.data)
+      .catch(this.handleError);
   }
 }
