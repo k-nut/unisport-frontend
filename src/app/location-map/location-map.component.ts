@@ -62,7 +62,7 @@ export class LocationMapComponent implements OnInit {
 
   onMarkerClick(location: Location) {
     this.location = location;
-    this.sportsClassService.getSportsClasses({location: location.name})
+    this.sportsClassService.getSportsClasses({locationUrl: location.url})
       .pipe(first())
       .subscribe(
         classes => {

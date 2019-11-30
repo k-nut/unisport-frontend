@@ -6,7 +6,7 @@
 
 <div class="container">
   <h2>{{location?.name}}</h2>
-
+  <a *ngIf="location" href="{{location.url}}">{{location.url | slice:0:60}}...</a>
 
   <ul class="class-list">
     <li *ngFor="let sportsClass of classes">

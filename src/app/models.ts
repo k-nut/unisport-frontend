@@ -51,6 +51,7 @@ export class Day {
 }
 
 export class Location {
+  url: string;
   name: string;
   lat: number;
   lon: number;

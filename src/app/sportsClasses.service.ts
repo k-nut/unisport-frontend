@@ -34,6 +34,7 @@ export enum BookingStatus {
 export interface ISearchOptions {
   name?: string;
   location?: string;
+  locationUrl?: string;
   bookable?: BookingStatus;
   days?: Day[];
 }
@@ -61,6 +62,9 @@ export class SportsClassService {
     }
     if (options.location) {
       params = params.set('location', options.location);
+    }
+    if (options.locationUrl) {
+      params = params.set('location_url', options.locationUrl);
     }
     return this.http.get<ISportsClassResponse>(this.sportsClassUrl, {params})
       .map(this.extractData)
