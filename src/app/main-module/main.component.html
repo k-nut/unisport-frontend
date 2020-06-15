@@ -38,6 +38,7 @@
     <div class="results-count">{{ sportsClasses.length }} Kurse gefunden</div>
 
     <unisport-sports-class
+      role="article"
       *ngFor="let sportsClass of sportsClasses | slice:pagingStart:pagingStart+10"
       class="sportsClass"
       [sportsClass]="sportsClass"
