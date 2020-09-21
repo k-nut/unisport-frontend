@@ -8,7 +8,8 @@ function getWindow (): any {
 export class PiwikService {
 
   trackSiteSearch(term, numberOfResults) {
-    const window = getWindow()
+    const window = getWindow();
+    window._paq.push(['disableCookies']);
     window._paq.push(['trackSiteSearch',
       term,
       false,
