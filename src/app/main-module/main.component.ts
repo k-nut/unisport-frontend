@@ -9,7 +9,7 @@ import {first} from 'rxjs/operators';
 
 
 @Component({
-  selector: 'unisport-root',
+  selector: 'unisport-main',
   templateUrl: './main.component.html',
   styleUrls: ['main.component.sass'],
 })
