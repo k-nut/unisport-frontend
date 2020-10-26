@@ -10,25 +10,30 @@
     </datalist>
 
     <div class="additionalFilters">
-      <div>
-        Angeboten am:
-        <label *ngFor="let day of days" class="checkbox-inline">
-          <input type="checkbox" [(ngModel)]="day.selected" name="{{day.name}}"/>{{day.name}}
-        </label>
+      <div class="filter-section">
+        <h2> Angeboten am: </h2>
+        <div>
+          <label *ngFor="let day of days" class="checkbox-inline">
+            <input type="checkbox" [(ngModel)]="day.selected" name="{{day.name}}"/>{{day.name}}
+          </label>
+        </div>
       </div>
 
 
-      <div>
-        Verfügbarkeit:
-        <label>
-          <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.all}}" name="bookable"/> Alle Kurse
-        </label>
-        <label>
-          <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.bookable}}" name="bookable"/> Nur buchbare
-        </label>
-        <label>
-          <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.withWaitList}}" name="bookable"/> Buchbar & Warteliste
-        </label>
+      <div class="filter-section">
+        <h2> Verfügbarkeit: </h2>
+        <div>
+          <label>
+            <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.all}}" name="bookable"/> Alle Kurse
+          </label>
+          <label>
+            <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.bookable}}" name="bookable"/> Nur buchbare
+          </label>
+          <label>
+            <input [(ngModel)]="bookable" type="radio" value="{{BookingStatus.withWaitList}}" name="bookable"/> Buchbar
+            & Warteliste
+          </label>
+        </div>
       </div>
     </div>
 
