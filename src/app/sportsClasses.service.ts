@@ -41,7 +41,7 @@ export interface ISearchOptions {
 
 @Injectable()
 export class SportsClassService {
-  private baseUrl = 'https://backend.unisport.berlin'
+  private baseUrl = 'https://api.unisport.berlin'
   private sportsClassUrl = `${this.baseUrl}/classes`;
   private namesUrl = `${this.baseUrl}/names`;
   private locationsUrl =  `${this.baseUrl}/locations`;
