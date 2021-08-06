@@ -1,4 +1,4 @@
-import {TestBed, async, ComponentFixture, tick} from '@angular/core/testing';
+import { TestBed, ComponentFixture, tick, waitForAsync } from '@angular/core/testing';
 
 import {RouterTestingModule} from '@angular/router/testing';
 import {MainComponent} from './main.component';
@@ -14,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 describe('MainComponent', () => {
   let fixture: ComponentFixture<MainComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const sportsClassesStub = {
       getSportsClasses: () => of([{name: 'Handball', description: 'Handball description'}]),
       getNames: () => of(['Kicker', 'Judo', 'Tennis'])
@@ -38,18 +38,18 @@ describe('MainComponent', () => {
     fixture = TestBed.createComponent(MainComponent);
   }));
 
-  it('should create the app', async(() => {
+  it('should create the app', waitForAsync(() => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
 
-  it('should create an input element', async(() => {
+  it('should create an input element', waitForAsync(() => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('input')).toBeTruthy();
   }));
 
-  it('should add class names to datalist', async(() => {
+  it('should add class names to datalist', waitForAsync(() => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelectorAll('datalist option').length).toBe(3);

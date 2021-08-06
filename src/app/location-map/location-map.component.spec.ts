@@ -1,4 +1,4 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import {LocationMapComponent} from './location-map.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
@@ -11,7 +11,7 @@ describe('LocationMapComponent', () => {
   let component: LocationMapComponent;
   let fixture: ComponentFixture<LocationMapComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const sportsClassesStub = {
       getLocations: () => of([])
     };

@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnChanges, SimpleChange, Renderer} from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, SimpleChange, Renderer2 } from '@angular/core';
 
 
 @Directive({selector: '[unisportHighlight]'})
@@ -6,7 +6,7 @@ export class HighlightDirective implements OnChanges {
   @Input() word: string;
   @Input() text: string;
 
-  constructor(private el: ElementRef, private renderer: Renderer) {}
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
     let newContent: string;
@@ -17,6 +17,6 @@ export class HighlightDirective implements OnChanges {
     }
     newContent = newContent.replace(new RegExp('\n', 'gi'), '<br />');
 
-    this.renderer.setElementProperty(this.el.nativeElement, 'innerHTML', newContent);
+    this.renderer.setProperty(this.el.nativeElement, 'innerHTML', newContent);
   }
 }
