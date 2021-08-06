@@ -30,30 +30,30 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
     BrowserAnimationsModule,
     LeafletModule.forRoot(), // TODO: Create separete map module? Does this create a new bundle and improve load time?
     RouterModule.forRoot([
-      {
+    {
         path: 'classes',
         component: MainComponent
-      },
-      {
+    },
+    {
         path: 'class-list',
         component: ClassListComponent
-      },
-      {
+    },
+    {
         path: 'map',
         component: LocationMapComponent,
-      },
-      {
+    },
+    {
         path: 'about',
         component: AboutComponent
-      },
-      {
+    },
+    {
         path: 'imprint',
         component: ImprintComponent
-      },
-      { path: '',
+    },
+    { path: '',
         redirectTo: '/classes',
         pathMatch: 'full' },
-    ])
+], { relativeLinkResolution: 'legacy' })
   ],
   providers: [],
   bootstrap: [AppComponent]

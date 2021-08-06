@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ClassListComponent } from './class-list.component';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -10,7 +10,7 @@ describe('ClassListComponent', () => {
   let component: ClassListComponent;
   let fixture: ComponentFixture<ClassListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const sportsClassesStub = {
       getNames: () => of(['Kicker', 'Judo', 'Tennis'])
     };
