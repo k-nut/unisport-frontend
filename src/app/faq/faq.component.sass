@@ -1,0 +1,39 @@
+dt
+  font-size: 1.3em
+  margin: 2em 0 .5em 0
+
+dt:before
+  content: ''
+  width: 1rem
+  height: 1rem
+  background-color: rgb(104, 198, 14)
+  border-radius: .25rem
+  display: inline-block
+  margin-right: 1ch
+
+dl
+  max-width: 80ch
+  line-height: 1.4em
+
+
+@keyframes bounce
+  0%
+    transform: scale(1, 1) translateY(0)
+  10%
+    transform: scale(1.1, .9) translateY(0)
+  30%
+    transform: scale(.9, 1.1) translateY(-10px)
+  50%
+    transform: scale(1.05, .95) translateY(0)
+  57%
+    transform: scale(1, 1) translateY(-1px)
+  64%
+    transform: scale(1, 1) translateY(0)
+  100%
+    transform: scale(1, 1) translateY(0)
+
+.loader img
+  margin-top: 3em
+  animation-name: bounce
+  animation-duration: 1.5s
+  animation-iteration-count: infinite

@@ -7,17 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {RouterModule} from '@angular/router';
 import {MainComponent} from './main-module/main.component';
-import {AboutComponent} from './about/about.component';
+import {FaqComponent} from './faq/faq.component';
 import {ImprintComponent} from './imprint/imprint.component';
 import {MainModule} from './main-module/main.module';
 import { ClassListComponent } from './class-list/class-list.component';
 import { LocationMapComponent } from './location-map/location-map.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {ContentfulService} from './contentful.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
+    FaqComponent,
     ImprintComponent,
     ClassListComponent,
     LocationMapComponent,
@@ -43,8 +44,8 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
         component: LocationMapComponent,
     },
     {
-        path: 'about',
-        component: AboutComponent
+        path: 'faq',
+        component: FaqComponent
     },
     {
         path: 'imprint',

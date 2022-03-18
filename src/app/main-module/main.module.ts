@@ -7,6 +7,7 @@ import {HighlightDirective} from '../highlight.directive';
 import {HttpClientModule} from '@angular/common/http';
 import {SportsClassService} from '../sportsClasses.service';
 import {PiwikService} from '../piwik.service';
+import {ContentfulService} from '../contentful.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {PiwikService} from '../piwik.service';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [SportsClassService, PiwikService],
+  providers: [SportsClassService, PiwikService, ContentfulService],
   exports: [
     MainComponent
   ]
