@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>FAQ</h2>
+
+  <div *ngIf="!entries.length" class="loader">
+    <img src="assets/ball.svg" alt="" /> FAQ lädt...
+  </div>
+
+  <dl>
+    <ng-container *ngFor="let entry of entries">
+      <dt>{{ entry.fields.question }}</dt>
+      <dd>{{ entry.fields.answer }}</dd>
+    </ng-container>
+  </dl>
+
+</div>
