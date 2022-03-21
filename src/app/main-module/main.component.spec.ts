@@ -1,15 +1,13 @@
-import { TestBed, ComponentFixture, tick, waitForAsync } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 
 import {RouterTestingModule} from '@angular/router/testing';
 import {MainComponent} from './main.component';
-import {FormsModule} from '@angular/forms';
 import {SportsClassService} from '../sportsClasses.service';
 import {of} from 'rxjs';
 import {PiwikService} from '../piwik.service';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {Router} from '@angular/router';
 import {AppModule} from '../app.module';
-import {MainModule} from './main.module';
-import {ActivatedRoute, Router} from '@angular/router';
 
 describe('MainComponent', () => {
   let fixture: ComponentFixture<MainComponent>;
@@ -24,15 +22,14 @@ describe('MainComponent', () => {
     };
 
     TestBed.configureTestingModule({
+      declarations: [MainComponent],
       imports: [
-        MainModule,
         RouterTestingModule.withRoutes([]),
       ],
       providers: [
         {provide: SportsClassService, useValue: sportsClassesStub},
         {provide: PiwikService, useValue: piwikStub},
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MainComponent);

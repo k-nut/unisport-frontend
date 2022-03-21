@@ -16,7 +16,7 @@ import {first} from 'rxjs/operators';
 
 export class MainComponent implements OnInit, OnDestroy {
   errorMessage: string;
-  pagingStart: number;
+  pagingStart = 1;
   days = [
     new Day('Mo'),
     new Day('Di'),
@@ -27,9 +27,9 @@ export class MainComponent implements OnInit, OnDestroy {
     new Day('So'),
   ];
   searchTerm = '';
-  sportsClasses: SportsClass[];
+  sportsClasses: SportsClass[]  = [];
   pages: number[];
-  currentPage: number;
+  currentPage = 1;
   pagination = {
     start: 1,
     end: 10
@@ -39,6 +39,7 @@ export class MainComponent implements OnInit, OnDestroy {
   classes: string[];
   loading = false;
   hasData = false;
+  hasSearched = false;
   private sub: Subscription;
 
   constructor(private sportsClassService: SportsClassService,
@@ -73,8 +74,10 @@ export class MainComponent implements OnInit, OnDestroy {
   getSportsClasses() {
     if (this.searchTerm === '') {
       this.hasData = false;
+      this.hasSearched = false;
       return;
     }
+    this.hasSearched = true;
     const selectedDays = this.days.filter(day => day.selected);
     this.updateUrlParams(selectedDays);
     this.loading = true;
@@ -110,11 +113,8 @@ export class MainComponent implements OnInit, OnDestroy {
         };
       });
     });
-    this.sportsClasses = [];
-    this.pagingStart = 0;
     this.getSportsClasses();
     this.pages = [...Array(10).keys()].map(i => i + 1);
-    this.currentPage = 1;
     this.sportsClassService.getNames()
       .pipe(first())
       .subscribe(
