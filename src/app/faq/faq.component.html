@@ -1,9 +1,7 @@
 <div class="container">
   <h2>FAQ</h2>
 
-  <div *ngIf="!entries.length" class="loader">
-    <img src="assets/ball.svg" alt="" /> FAQ lädt...
-  </div>
+  <unisport-loader *ngIf="!entries.length" class="loader" text="FAQ Lädt..." ></unisport-loader>
 
   <dl>
     <ng-container *ngFor="let entry of entries">

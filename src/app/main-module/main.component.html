@@ -39,7 +39,7 @@
 
   </form>
 
-  <ng-template [ngIf]="hasData" [ngIfElse]="noData">
+  <ng-template [ngIf]="hasData">
     <div class="results-count">{{ sportsClasses.length }} Kurse gefunden</div>
 
     <unisport-sports-class
@@ -59,16 +59,20 @@
     </div>
   </ng-template>
 
-  <ng-template #noData>
-    <ng-template [ngIf]="!searchTerm" [ngIfElse]="noResults">
-      <div class="disclaimer">
-        Willkommen auf unisport.berlin. Durchsuche alle Unisportkurse von FU, HU, TU, HTW, Beuth und der Uni Potsdam
-        an einer Stelle!
-      </div>
-    </ng-template>
+  <ng-template [ngIf]="loading">
+    <unisport-loader style="margin-top: 3em"></unisport-loader>
   </ng-template>
 
-  <ng-template #noResults>
-    Keine Ergebniss gefunden
+  <ng-template [ngIf]="!hasSearched">
+    <div class="disclaimer">
+      Willkommen auf unisport.berlin. Durchsuche alle Unisportkurse von FU, HU, TU, HTW, Beuth und der Uni Potsdam
+      an einer Stelle!
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="hasSearched && !hasData && !loading">
+    <div class="disclaimer">
+      Keine Ergebnisse gefunden. <span role="img" alt="">😔</span>
+    </div>
   </ng-template>
 </div>
