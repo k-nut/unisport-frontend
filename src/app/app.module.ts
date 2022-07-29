@@ -18,6 +18,7 @@ import {PiwikService} from './piwik.service';
 import {ContentfulService} from './contentful.service';
 import {SportsClassComponent} from './sports-class/sports-class.component';
 import {HighlightDirective} from './highlight.directive';
+import {Markdown} from './markdown.pipe';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {HighlightDirective} from './highlight.directive';
     ClassListComponent,
     FaqComponent,
     HighlightDirective,
+    Markdown,
     ImprintComponent,
     LoaderComponent,
     LocationMapComponent,

@@ -6,7 +6,7 @@
   <dl>
     <ng-container *ngFor="let entry of entries">
       <dt>{{ entry.fields.question }}</dt>
-      <dd>{{ entry.fields.answer }}</dd>
+      <dd [innerHTML]="entry.fields.answer | markdown"></dd>
     </ng-container>
   </dl>
 
