@@ -4,6 +4,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {FaqComponent} from './faq.component';
 import {ContentfulService, FAQEntry} from '../contentful.service';
 import {Entry} from 'contentful';
+import {Markdown} from '../markdown.pipe';
 
 describe('FaqComponent', () => {
   let component: FaqComponent;
@@ -21,7 +22,7 @@ describe('FaqComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      declarations: [FaqComponent],
+      declarations: [FaqComponent, Markdown],
       imports: [RouterTestingModule],
       providers: [
         {provide: ContentfulService, useValue: contentFulStub},
