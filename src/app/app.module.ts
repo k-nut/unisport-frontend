@@ -38,7 +38,7 @@ import {Markdown} from './markdown.pipe';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    LeafletModule.forRoot(), // TODO: Create separete map module? Does this create a new bundle and improve load time?
+    LeafletModule, // TODO: Create separete map module? Does this create a new bundle and improve load time?
     RouterModule.forRoot([
       {
         path: 'classes',
