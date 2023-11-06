@@ -65,7 +65,7 @@ import {Markdown} from './markdown.pipe';
         redirectTo: '/classes',
         pathMatch: 'full'
       },
-    ], {relativeLinkResolution: 'legacy'})
+    ], {})
   ],
   providers: [SportsClassService, PiwikService, ContentfulService],
   bootstrap: [AppComponent]
