@@ -8,6 +8,8 @@ import {PiwikService} from '../piwik.service';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppModule} from '../app.module';
+import {FormsModule} from '@angular/forms';
+import {SportsClassComponent} from '../sports-class/sports-class.component';
 
 describe('MainComponent', () => {
   let fixture: ComponentFixture<MainComponent>;
@@ -22,8 +24,9 @@ describe('MainComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      declarations: [MainComponent],
+      declarations: [SportsClassComponent, MainComponent],
       imports: [
+        FormsModule,
         RouterTestingModule.withRoutes([]),
       ],
       providers: [
