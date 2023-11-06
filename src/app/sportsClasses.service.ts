@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse, HttpParams, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpErrorResponse} from '@angular/common/http';
 
 
 import {SportsClass, Day, ISportsClassResponse, Location} from './models';
@@ -93,8 +93,7 @@ export class SportsClassService {
     return json.data.map(sc => new SportsClass(sc));
   }
 
-  private handleError(error: HttpErrorResponse | any) {
-    // In a real world app, you might use a remote logging infrastructure
+  private handleError(error: HttpErrorResponse | Error) {
     let errMsg: string;
     if (error instanceof HttpErrorResponse) {
       const err = error.error || JSON.stringify(error.error);

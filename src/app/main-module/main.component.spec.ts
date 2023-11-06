@@ -5,9 +5,7 @@ import {MainComponent} from './main.component';
 import {SportsClassService} from '../sportsClasses.service';
 import {of} from 'rxjs';
 import {PiwikService} from '../piwik.service';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {Router} from '@angular/router';
-import {AppModule} from '../app.module';
 import {FormsModule} from '@angular/forms';
 import {SportsClassComponent} from '../sports-class/sports-class.component';
 

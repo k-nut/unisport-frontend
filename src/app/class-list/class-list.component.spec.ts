@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ClassListComponent } from './class-list.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {SportsClassService} from '../sportsClasses.service';
-import {PiwikService} from '../piwik.service';
 import {of} from 'rxjs/internal/observable/of';
 
 describe('ClassListComponent', () => {

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, SimpleChange, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, Renderer2 } from '@angular/core';
 
 
 @Directive({selector: '[unisportHighlight]'})
@@ -8,7 +8,7 @@ export class HighlightDirective implements OnChanges {
 
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
-  ngOnChanges(changes: {[ propName: string]: SimpleChange}) {
+  ngOnChanges() {
     let newContent: string;
     if (this.word && this.word.length > 1) {
       newContent = this.text.replace(new RegExp('(' + this.word + ')', 'gi'), '<b class=\'highlight\'>$1</b>');

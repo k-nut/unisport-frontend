@@ -4,7 +4,6 @@ import {LocationMapComponent} from './location-map.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {RouterTestingModule} from '@angular/router/testing';
 import {of} from 'rxjs/internal/observable/of';
-import {ClassListComponent} from '../class-list/class-list.component';
 import {SportsClassService} from '../sportsClasses.service';
 
 describe('LocationMapComponent', () => {

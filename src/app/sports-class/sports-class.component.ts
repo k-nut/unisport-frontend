@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {SportsClass} from '../models';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -69,15 +69,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class SportsClassComponent implements OnInit {
+export class SportsClassComponent {
   @Input() sportsClass: SportsClass;
   @Input() searchTerm: string;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }
 
 
