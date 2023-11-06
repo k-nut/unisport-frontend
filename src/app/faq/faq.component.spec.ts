@@ -5,6 +5,7 @@ import {FaqComponent} from './faq.component';
 import {ContentfulService, FAQEntry} from '../contentful.service';
 import {Entry} from 'contentful';
 import {Markdown} from '../markdown.pipe';
+import {LoaderComponent} from '../loader.component';
 
 describe('FaqComponent', () => {
   let component: FaqComponent;
@@ -22,7 +23,7 @@ describe('FaqComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      declarations: [FaqComponent, Markdown],
+      declarations: [FaqComponent, Markdown, LoaderComponent],
       imports: [RouterTestingModule],
       providers: [
         {provide: ContentfulService, useValue: contentFulStub},
