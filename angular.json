@@ -121,6 +121,9 @@
           }
         }
       }
-    }},
-  "defaultProject": "unisport-frontend"
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
 }
