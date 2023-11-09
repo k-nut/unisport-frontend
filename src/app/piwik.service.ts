@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-function getWindow (): any {
+function getWindow (): Window {
   return window;
 }
 
@@ -9,13 +9,10 @@ export class PiwikService {
 
   trackSiteSearch(term, numberOfResults) {
     const window = getWindow();
-    window._paq.push(['trackSiteSearch',
+    window["_paq"].push(['trackSiteSearch',
       term,
       false,
       numberOfResults
     ]);
   }
-
-  constructor() { }
-
 }

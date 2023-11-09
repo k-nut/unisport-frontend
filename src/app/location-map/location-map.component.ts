@@ -13,7 +13,6 @@ import {Location, SportsClass} from '../models';
 
 export class LocationMapComponent implements OnInit {
   locations: Location[];
-  errorMessage: string;
   layers: Layer[];
 
   options = {
@@ -56,7 +55,6 @@ export class LocationMapComponent implements OnInit {
               )
           );
         },
-        error => this.errorMessage = error as any
       );
   }
 
@@ -69,7 +67,6 @@ export class LocationMapComponent implements OnInit {
           this.classes = classes;
           this.changeDetectorRef.detectChanges();
         },
-        error => this.errorMessage = error as any
       );
   }
 }

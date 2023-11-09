@@ -15,7 +15,6 @@ import {first} from 'rxjs/operators';
 })
 
 export class MainComponent implements OnInit, OnDestroy {
-  errorMessage: string;
   pagingStart = 1;
   days = [
     new Day('Mo'),
@@ -95,8 +94,7 @@ export class MainComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.piwikService.trackSiteSearch(this.searchTerm, sportsClasses.length);
           this.setPage(1);
-        },
-        error => this.errorMessage = error as any);
+        });
   }
 
   ngOnInit() {
@@ -120,9 +118,7 @@ export class MainComponent implements OnInit, OnDestroy {
       .subscribe(
         names => {
           this.classes = names.sort();
-        },
-        error => this.errorMessage = error as any
-      );
+        } );
   }
 
   ngOnDestroy() {

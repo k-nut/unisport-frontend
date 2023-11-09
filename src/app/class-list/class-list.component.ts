@@ -9,7 +9,6 @@ import {first} from 'rxjs/operators';
 })
 export class ClassListComponent implements OnInit {
   classes: string[];
-  errorMessage: string;
 
   constructor(private sportsClassService: SportsClassService) { }
 
@@ -20,7 +19,6 @@ export class ClassListComponent implements OnInit {
         names => {
           this.classes = names.sort().filter((name, index) => names.indexOf(name) === index);
         },
-        error => this.errorMessage = error as any
       );
   }
 
