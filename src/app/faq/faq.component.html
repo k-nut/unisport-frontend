@@ -5,8 +5,8 @@
 
   <dl>
     <ng-container *ngFor="let entry of entries">
-      <dt>{{ entry.fields.question }}</dt>
-      <dd [innerHTML]="entry.fields.answer | markdown"></dd>
+      <dt>{{ entry.question }}</dt>
+      <dd [innerHTML]="entry.answer | markdown"></dd>
     </ng-container>
   </dl>
 

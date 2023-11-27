@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Entry} from 'contentful';
 import {ContentfulService, FAQEntry} from '../contentful.service';
 
 @Component({
@@ -9,7 +8,7 @@ import {ContentfulService, FAQEntry} from '../contentful.service';
   })
 
 export class FaqComponent implements OnInit {
-  entries: Entry<FAQEntry>[] = [];
+  entries: FAQEntry[] = [];
 
   constructor(private contentfulService: ContentfulService) {
   }
