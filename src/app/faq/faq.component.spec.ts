@@ -3,7 +3,6 @@ import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular
 import {RouterTestingModule} from '@angular/router/testing';
 import {FaqComponent} from './faq.component';
 import {ContentfulService, FAQEntry} from '../contentful.service';
-import {Entry} from 'contentful';
 import {Markdown} from '../markdown.pipe';
 import {LoaderComponent} from '../loader.component';
 
@@ -13,12 +12,9 @@ describe('FaqComponent', () => {
 
   beforeEach(waitForAsync(() => {
     const contentFulStub = {
-      getFAQEntries: (): Promise<Entry<FAQEntry>[]> => Promise.resolve([{
-        fields: {question: 'Question 1', answer: 'Answer 1'}
-      } as Entry<FAQEntry>,
-        {
-          fields: {question: 'Question 2', answer: 'Answer 2'}
-        } as Entry<FAQEntry>
+      getFAQEntries: (): Promise<FAQEntry[]> => Promise.resolve([
+        {question: 'Question 1', answer: 'Answer 1'},
+        {question: 'Question 2', answer: 'Answer 2'}
       ]),
     };
 

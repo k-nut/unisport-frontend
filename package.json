@@ -23,7 +23,7 @@
     "@angular/platform-server": "^16.2.12",
     "@angular/router": "^16.2.12",
     "@asymmetrik/ngx-leaflet": "^16.0.1",
-    "contentful": "^9.1.13",
+    "contentful": "^10.6.12",
     "leaflet": "^1.9.4",
     "marked": "^4.0.18",
     "rxjs": "^6.5.3",
